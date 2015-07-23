@@ -20,6 +20,10 @@ module.exports = {
       test: /\.js$/,
       loaders: ['react-hot', 'babel'],
       include: path.join(__dirname, 'src') // Must be an absolute path
+    }, { // `color` does `require('index.json')` internally
+      test: /\.json$/,
+      loaders: ['json'],
+      include: path.join(__dirname, 'node_modules') // Must be an absolute path
     }, {
       test: /\.less$/,
       loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[name]__[local]___[hash:base64:5]!less'),
