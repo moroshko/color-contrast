@@ -4,12 +4,13 @@ import React, { Component, PropTypes } from 'react';
 
 export default class ColorToAdjust extends Component {
   static propTypes = {
+    isValid: PropTypes.bool.isRequired,
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired
   };
 
   render() {
-    const { value, onChange } = this.props;
+    const { isValid, value, onChange } = this.props;
     const id = 'color-to-adjust';
 
     return (
@@ -17,7 +18,8 @@ export default class ColorToAdjust extends Component {
         <label className={styles.label} htmlFor={id}>
           Color to adjust:
         </label>
-        #<input id={id} type="text" value={value}
+        #<input id={id} className={!isValid && styles.error}
+                type="text" value={value}
                 onChange={event => onChange(event.currentTarget.value)} />
       </div>
     );
