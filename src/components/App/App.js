@@ -3,8 +3,8 @@ import styles from './App.less';
 import React, { Component, PropTypes } from 'react';
 import * as actions from 'flux/actions';
 import DesiredContrastRatio from 'DesiredContrastRatio/DesiredContrastRatio';
-import ConstantColor from 'ConstantColor/ConstantColor';
-import ColorToAdjust from 'ColorToAdjust/ColorToAdjust';
+import BackgroundColor from 'BackgroundColor/BackgroundColor';
+import ForegroundColor from 'ForegroundColor/ForegroundColor';
 import Preview from 'Preview/Preview';
 
 export default class App extends Component {
@@ -17,8 +17,8 @@ export default class App extends Component {
     const { state } = this.props;
 
     return state.desiredContrastRatio.isValid &&
-           state.constantColor.isValid &&
-           state.colorToAdjust.isValid;
+           state.backgroundColor.isValid &&
+           state.foregroundColor.isValid;
   }
 
   render() {
@@ -33,23 +33,22 @@ export default class App extends Component {
               onChange={value => dispatch(actions.updateDesiredContrastRatio(value))} />
           </div>
           <div className={styles.field}>
-            <ConstantColor
-              {...state.constantColor}
-              onChange={value => dispatch(actions.updateConstantColor(value))} />
+            <BackgroundColor
+              {...state.backgroundColor}
+              onChange={value => dispatch(actions.updateBackgroundColor(value))} />
           </div>
           <div className={styles.field}>
-            <ColorToAdjust
-              {...state.colorToAdjust}
-              onChange={value => dispatch(actions.updateColorToAdjust(value))} />
+            <ForegroundColor
+              {...state.foregroundColor}
+              onChange={value => dispatch(actions.updateForegroundColor(value))} />
           </div>
         </div>
         <div className={styles.preview}>
           {
             this.isPreviewVisible() &&
             <Preview
-              constantColor={state.constantColor.value}
-              colorToAdjust={state.colorToAdjust.value}
-              isBackgroundColorConstant={state.isBackgroundColorConstant} />
+              backgroundColor={state.backgroundColor.value}
+              foregroundColor={state.foregroundColor.value} />
           }
         </div>
       </div>

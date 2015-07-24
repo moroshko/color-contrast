@@ -1,8 +1,8 @@
 import {
   UPDATE_DESIRED_CONTRAST_RATIO,
-  UPDATE_CONSTANT_COLOR,
-  UPDATE_COLOR_TO_ADJUST,
-  SWITCH_COLOR_AND_BACKGROUND_COLOR
+  UPDATE_BACKGROUND_COLOR,
+  UPDATE_FOREGROUND_COLOR,
+  SWITCH_COLORS
 } from 'flux/constants';
 
 export function updateDesiredContrastRatio(value) {
@@ -12,22 +12,22 @@ export function updateDesiredContrastRatio(value) {
   };
 }
 
-export function updateConstantColor(value) {
+export function updateBackgroundColor(value) {
   return {
-    type: UPDATE_CONSTANT_COLOR,
+    type: UPDATE_BACKGROUND_COLOR,
     value
   };
 }
 
-export function updateColorToAdjust(value) {
+export function updateForegroundColor(value) {
   return {
-    type: UPDATE_COLOR_TO_ADJUST,
+    type: UPDATE_FOREGROUND_COLOR,
     value
   };
 }
 
-export function switchColorAndBackgroundColor(value) {
+export function switchColors(value) {
   return {
-    type: SWITCH_COLOR_AND_BACKGROUND_COLOR
+    type: SWITCH_COLORS
   };
 }

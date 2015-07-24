@@ -4,19 +4,16 @@ import React, { Component, PropTypes } from 'react';
 
 export default class Preview extends Component {
   static propTypes = {
-    constantColor: PropTypes.string.isRequired,
-    colorToAdjust: PropTypes.string.isRequired,
-    isBackgroundColorConstant: PropTypes.bool.isRequired
+    backgroundColor: PropTypes.string.isRequired,
+    foregroundColor: PropTypes.string.isRequired
   };
 
   render() {
-    const { constantColor, colorToAdjust, isBackgroundColorConstant } = this.props;
-    const color = (isBackgroundColorConstant ? colorToAdjust : constantColor);
-    const backgroundColor = (isBackgroundColorConstant ? constantColor : colorToAdjust);
+    const { backgroundColor, foregroundColor } = this.props;
 
     return (
       <div className={styles.container}
-           style={{ color: '#' + color, backgroundColor: '#' + backgroundColor }}>
+           style={{ color: '#' + foregroundColor, backgroundColor: '#' + backgroundColor }}>
         <div className={styles.line} style={{ fontSize: '18px' }}>
           React is awesome (18px)
         </div>

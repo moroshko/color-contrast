@@ -2,9 +2,9 @@ import number from 'utils/number';
 import color from 'utils/color';
 import {
   UPDATE_DESIRED_CONTRAST_RATIO,
-  UPDATE_CONSTANT_COLOR,
-  UPDATE_COLOR_TO_ADJUST,
-  SWITCH_COLOR_AND_BACKGROUND_COLOR
+  UPDATE_BACKGROUND_COLOR,
+  UPDATE_FOREGROUND_COLOR,
+  SWITCH_COLORS
 } from 'flux/constants';
 
 const initialState = {
@@ -12,15 +12,14 @@ const initialState = {
     isValid: true,
     value: '4.5'
   },
-  constantColor: {
+  backgroundColor: {
     isValid: true,
     value: 'eeeeee'
   },
-  colorToAdjust: {
+  foregroundColor: {
     isValid: true,
     value: '767676'
-  },
-  isBackgroundColorConstant: true
+  }
 };
 
 export default function(state = initialState, action) {
@@ -34,28 +33,29 @@ export default function(state = initialState, action) {
         }
       };
 
-    case UPDATE_CONSTANT_COLOR:
+    case UPDATE_BACKGROUND_COLOR:
       return {
         ...state,
-        constantColor: {
+        backgroundColor: {
           isValid: color.isValid('#' + action.value),
           value: action.value
         }
       };
 
-    case UPDATE_COLOR_TO_ADJUST:
+    case UPDATE_FOREGROUND_COLOR:
       return {
         ...state,
-        colorToAdjust: {
+        foregroundColor: {
           isValid: color.isValid('#' + action.value),
           value: action.value
         }
       };
 
-    case SWITCH_COLOR_AND_BACKGROUND_COLOR:
+    case SWITCH_COLORS:
       return {
         ...state,
-        isBackgroundColorConstant: !isBackgroundColorConstant
+        backgroundColor: {...foregroundColor},
+        foregroundColor: {...backgroundColor}
       };
 
     default:

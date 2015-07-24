@@ -1,8 +1,8 @@
-import styles from './ColorToAdjust.less';
+import styles from './ForegroundColor.less';
 
 import React, { Component, PropTypes } from 'react';
 
-export default class ColorToAdjust extends Component {
+export default class ForegroundColor extends Component {
   static propTypes = {
     isValid: PropTypes.bool.isRequired,
     value: PropTypes.string.isRequired,
@@ -11,12 +11,12 @@ export default class ColorToAdjust extends Component {
 
   render() {
     const { isValid, value, onChange } = this.props;
-    const id = 'color-to-adjust';
+    const id = 'foreground-color';
 
     return (
       <div>
         <label className={styles.label} htmlFor={id}>
-          Color to adjust:
+          Foreground color:
         </label>
         #<input id={id} className={!isValid && styles.error}
                 type="text" value={value}
