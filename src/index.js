@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, bindActionCreators } from 'redux';
-import thunk from 'redux-thunk';
 import { Provider, Connector } from 'react-redux';
-import * as actions from 'flux/actions';
 import reducer from 'flux/reducer';
 import App from 'App/App';
 
@@ -23,11 +21,9 @@ class ColorContrast extends Component {
       <Provider store={this.store}>
         {() =>
           <Connector select={this.select}>
-            {({ state, dispatch }) => {
-              return (
-                <App state={state} {...bindActionCreators(actions, dispatch)} />
-              );
-            }}
+            {
+              ({ state, dispatch }) => <App state={state} dispatch={dispatch} />
+            }
           </Connector>
         }
       </Provider>
