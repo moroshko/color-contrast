@@ -3,7 +3,8 @@ import color from 'utils/color';
 import {
   UPDATE_DESIRED_CONTRAST_RATIO,
   UPDATE_CONSTANT_COLOR,
-  UPDATE_COLOR_TO_ADJUST
+  UPDATE_COLOR_TO_ADJUST,
+  SWITCH_COLOR_AND_BACKGROUND_COLOR
 } from 'flux/constants';
 
 const initialState = {
@@ -18,7 +19,8 @@ const initialState = {
   colorToAdjust: {
     isValid: true,
     value: '767676'
-  }
+  },
+  isBackgroundColorConstant: true
 };
 
 export default function(state = initialState, action) {
@@ -48,6 +50,12 @@ export default function(state = initialState, action) {
           isValid: color.isValid('#' + action.value),
           value: action.value
         }
+      };
+
+    case SWITCH_COLOR_AND_BACKGROUND_COLOR:
+      return {
+        ...state,
+        isBackgroundColorConstant: !isBackgroundColorConstant
       };
 
     default:

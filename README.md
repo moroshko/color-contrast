@@ -2,7 +2,12 @@
 
 ## Todo
 
-* Create proof of concept
+* Add button to switch color and background color
+* Show current contrast
+* Add 'AA' and 'AAA' buttons for contrast
+
+
+
 
 ## Links
 
