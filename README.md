@@ -2,8 +2,10 @@
 
 ## Todo
 
-* For every line in preview, show whether it's accessible
+* Automatically calculate accessible color
 * Publish to Github pages
+* Add CNAME and submit PR to js.org
+* Add eslint
 
 
 

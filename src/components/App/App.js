@@ -52,7 +52,8 @@ export default class App extends Component {
               <div>
                 <CurrentContrast backgroundColor={state.backgroundColor.value}
                                  foregroundColor={state.foregroundColor.value} />
-                <Preview backgroundColor={state.backgroundColor.value}
+                <Preview accessibilityLevel={state.accessibilityLevel}
+                         backgroundColor={state.backgroundColor.value}
                          foregroundColor={state.foregroundColor.value} />
               </div>
             } else {
