@@ -7,6 +7,7 @@ import AccessibilityLevel from 'AccessibilityLevel/AccessibilityLevel';
 import BackgroundColor from 'BackgroundColor/BackgroundColor';
 import SwitchColors from 'SwitchColors/SwitchColors';
 import ForegroundColor from 'ForegroundColor/ForegroundColor';
+import Font from 'Font/Font';
 import CurrentContrast from 'CurrentContrast/CurrentContrast';
 import Preview from 'Preview/Preview';
 
@@ -19,13 +20,16 @@ export default class App extends Component {
   isPreviewVisible() {
     const { state } = this.props;
 
-    return state.backgroundColor.isValid && state.foregroundColor.isValid;
+    return state.backgroundColor.isValid &&
+           state.foregroundColor.isValid &&
+           state.fontSize.isValid;
   }
 
   render() {
     const { state, dispatch } = this.props;
     const { updateAccessibilityLevel, updateBackgroundColor,
-            switchColors, updateForegroundColor } = actionCreators;
+            switchColors, updateForegroundColor, updateFontSize,
+            toggleIsFontBold } = actionCreators;
 
     return (
       <div className={styles.container}>
@@ -44,6 +48,10 @@ export default class App extends Component {
           <div className={styles.field}>
             <ForegroundColor {...state.foregroundColor}
                              {...bindActionCreators({ updateForegroundColor }, dispatch)} />
+          </div>
+          <div className={styles.field}>
+            <Font {...state.fontSize} isBold={state.isFontBold}
+                  {...bindActionCreators({ updateFontSize, toggleIsFontBold }, dispatch)} />
           </div>
         </div>
         <div className={styles.preview}>

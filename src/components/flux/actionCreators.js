@@ -1,5 +1,6 @@
 import { UPDATE_ACCESSIBILITY_LEVEL, UPDATE_BACKGROUND_COLOR,
-         UPDATE_FOREGROUND_COLOR, SWITCH_COLORS } from 'flux/constants';
+         SWITCH_COLORS, UPDATE_FOREGROUND_COLOR, UPDATE_FONT_SIZE,
+         TOGGLE_IS_FONT_BOLD } from 'flux/constants';
 
 export function updateAccessibilityLevel(value) {
   return {
@@ -25,5 +26,18 @@ export function updateForegroundColor(value) {
 export function switchColors(value) {
   return {
     type: SWITCH_COLORS
+  };
+}
+
+export function updateFontSize(value) {
+  return {
+    type: UPDATE_FONT_SIZE,
+    value
+  };
+}
+
+export function toggleIsFontBold() {
+  return {
+    type: TOGGLE_IS_FONT_BOLD
   };
 }

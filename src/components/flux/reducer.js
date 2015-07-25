@@ -1,6 +1,8 @@
 import colorUtils from 'utils/color';
+import numberUtils from 'utils/number';
 import { UPDATE_ACCESSIBILITY_LEVEL, UPDATE_BACKGROUND_COLOR,
-         UPDATE_FOREGROUND_COLOR, SWITCH_COLORS } from 'flux/constants';
+         SWITCH_COLORS, UPDATE_FOREGROUND_COLOR, UPDATE_FONT_SIZE,
+         TOGGLE_IS_FONT_BOLD } from 'flux/constants';
 
 const initialState = {
   accessibilityLevel: 'AA',
@@ -11,7 +13,12 @@ const initialState = {
   foregroundColor: {
     isValid: true,
     value: '#767676'
-  }
+  },
+  fontSize: {
+    isValid: true,
+    value: '14'
+  },
+  isFontBold: false
 };
 
 export default function(state = initialState, action) {
@@ -31,6 +38,13 @@ export default function(state = initialState, action) {
         }
       };
 
+    case SWITCH_COLORS:
+      return {
+        ...state,
+        backgroundColor: {...state.foregroundColor},
+        foregroundColor: {...state.backgroundColor}
+      };
+
     case UPDATE_FOREGROUND_COLOR:
       return {
         ...state,
@@ -40,11 +54,19 @@ export default function(state = initialState, action) {
         }
       };
 
-    case SWITCH_COLORS:
+    case UPDATE_FONT_SIZE:
       return {
         ...state,
-        backgroundColor: {...state.foregroundColor},
-        foregroundColor: {...state.backgroundColor}
+        fontSize: {
+          isValid: numberUtils.isIntegerInRange(action.value, 8, 50),
+          value: action.value
+        }
+      };
+
+    case TOGGLE_IS_FONT_BOLD:
+      return {
+        ...state,
+        isFontBold: !state.isFontBold
       };
 
     default:
