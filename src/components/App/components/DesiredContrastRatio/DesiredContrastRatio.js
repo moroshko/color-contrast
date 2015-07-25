@@ -14,13 +14,16 @@ export default class DesiredContrastRatio extends Component {
     const id = 'contrast-ratio';
 
     return (
-      <div>
+      <div className={styles.container}>
         <label className={styles.label} htmlFor={id}>
           Desired contrast ratio:
         </label>
-        <input id={id} className={!isValid && styles.error}
-               type="text" value={value}
-               onChange={event => onChange(event.currentTarget.value)} />
+        <div className={styles.field}>
+          <input id={id} className={!isValid && styles.error}
+                 type="text" value={value}
+                 onChange={event => onChange(event.currentTarget.value)} />
+          <div className={styles.helpText}>between 1 and 21</div>
+        </div>
       </div>
     );
   }

@@ -1,7 +1,7 @@
-function isFloat(str) {
-  const float = parseFloat(str);
+const FLOAT_REGEX = /^\d+(\.\d+)?$/;
 
-  return !isNaN(float);
+function isFloat(str) {
+  return FLOAT_REGEX.test(str);
 }
 
 export default {

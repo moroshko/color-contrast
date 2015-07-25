@@ -13,7 +13,7 @@ export default class Preview extends Component {
 
     return (
       <div className={styles.container}
-           style={{ color: '#' + foregroundColor, backgroundColor: '#' + backgroundColor }}>
+           style={{ color: foregroundColor, backgroundColor: backgroundColor }}>
         <div className={styles.line} style={{ fontSize: '18px' }}>
           React is awesome (18px)
         </div>

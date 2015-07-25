@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, bindActionCreators } from 'redux';
+import { createStore } from 'redux';
 import { Provider, Connector } from 'react-redux';
 import reducer from 'flux/reducer';
 import App from 'App/App';

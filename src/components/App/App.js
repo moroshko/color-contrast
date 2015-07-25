@@ -1,9 +1,11 @@
 import styles from './App.less';
 
 import React, { Component, PropTypes } from 'react';
-import * as actions from 'flux/actions';
+import { bindActionCreators } from 'redux';
+import * as actionCreators from 'flux/actionCreators';
 import DesiredContrastRatio from 'DesiredContrastRatio/DesiredContrastRatio';
 import BackgroundColor from 'BackgroundColor/BackgroundColor';
+import SwitchColors from 'SwitchColors/SwitchColors';
 import ForegroundColor from 'ForegroundColor/ForegroundColor';
 import Preview from 'Preview/Preview';
 
@@ -23,6 +25,7 @@ export default class App extends Component {
 
   render() {
     const { state, dispatch } = this.props;
+    const { switchColors } = actionCreators;
 
     return (
       <div className={styles.container}>
@@ -30,17 +33,20 @@ export default class App extends Component {
           <div className={styles.field}>
             <DesiredContrastRatio
               {...state.desiredContrastRatio}
-              onChange={value => dispatch(actions.updateDesiredContrastRatio(value))} />
+              onChange={value => dispatch(actionCreators.updateDesiredContrastRatio(value))} />
           </div>
           <div className={styles.field}>
             <BackgroundColor
               {...state.backgroundColor}
-              onChange={value => dispatch(actions.updateBackgroundColor(value))} />
+              onChange={value => dispatch(actionCreators.updateBackgroundColor(value))} />
+          </div>
+          <div>
+            <SwitchColors {...bindActionCreators({ switchColors }, dispatch)} />
           </div>
           <div className={styles.field}>
             <ForegroundColor
               {...state.foregroundColor}
-              onChange={value => dispatch(actions.updateForegroundColor(value))} />
+              onChange={value => dispatch(actionCreators.updateForegroundColor(value))} />
           </div>
         </div>
         <div className={styles.preview}>

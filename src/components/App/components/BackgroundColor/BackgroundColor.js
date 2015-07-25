@@ -18,9 +18,9 @@ export default class BackgroundColor extends Component {
         <label className={styles.label} htmlFor={id}>
           Background color:
         </label>
-        #<input id={id} className={!isValid && styles.error}
-                type="text" value={value}
-                onChange={event => onChange(event.currentTarget.value)} />
+        <input id={id} className={!isValid && styles.error}
+               type="text" value={value}
+               onChange={event => onChange(event.currentTarget.value)} />
       </div>
     );
   }

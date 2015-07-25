@@ -14,21 +14,31 @@ const initialState = {
   },
   backgroundColor: {
     isValid: true,
-    value: 'eeeeee'
+    value: '#eeeeee'
   },
   foregroundColor: {
     isValid: true,
-    value: '767676'
+    value: '#767676'
   }
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
     case UPDATE_DESIRED_CONTRAST_RATIO:
+      let isValid = number.isFloat(action.value);
+
+      if (isValid) {
+        const float = parseFloat(action.value);
+
+        if (float < 1 || float > 21) {
+          isValid = false;
+        }
+      }
+
       return {
         ...state,
         desiredContrastRatio: {
-          isValid: number.isFloat(action.value),
+          isValid,
           value: action.value
         }
       };
@@ -37,7 +47,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         backgroundColor: {
-          isValid: color.isValid('#' + action.value),
+          isValid: color.isValid(action.value),
           value: action.value
         }
       };
@@ -46,7 +56,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         foregroundColor: {
-          isValid: color.isValid('#' + action.value),
+          isValid: color.isValid(action.value),
           value: action.value
         }
       };
@@ -54,8 +64,8 @@ export default function(state = initialState, action) {
     case SWITCH_COLORS:
       return {
         ...state,
-        backgroundColor: {...foregroundColor},
-        foregroundColor: {...backgroundColor}
+        backgroundColor: {...state.foregroundColor},
+        foregroundColor: {...state.backgroundColor}
       };
 
     default:
