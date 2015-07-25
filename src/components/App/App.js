@@ -2,7 +2,7 @@ import styles from './App.less';
 
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
-import actionCreators from 'flux/actionCreators';
+import * as actionCreators from 'flux/actionCreators';
 import DesiredContrastRatio from 'DesiredContrastRatio/DesiredContrastRatio';
 import BackgroundColor from 'BackgroundColor/BackgroundColor';
 import SwitchColors from 'SwitchColors/SwitchColors';
