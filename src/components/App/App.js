@@ -7,6 +7,7 @@ import DesiredContrastRatio from 'DesiredContrastRatio/DesiredContrastRatio';
 import BackgroundColor from 'BackgroundColor/BackgroundColor';
 import SwitchColors from 'SwitchColors/SwitchColors';
 import ForegroundColor from 'ForegroundColor/ForegroundColor';
+import CurrentContrast from 'CurrentContrast/CurrentContrast';
 import Preview from 'Preview/Preview';
 
 export default class App extends Component {
@@ -50,9 +51,13 @@ export default class App extends Component {
         <div className={styles.preview}>
           {
             this.isPreviewVisible() &&
-            <Preview
-              backgroundColor={state.backgroundColor.value}
-              foregroundColor={state.foregroundColor.value} />
+            <div>
+              <CurrentContrast backgroundColor={state.backgroundColor.value}
+                               foregroundColor={state.foregroundColor.value}
+                               desiredContrastRatio={state.desiredContrastRatio.value} />
+              <Preview backgroundColor={state.backgroundColor.value}
+                       foregroundColor={state.foregroundColor.value} />
+            </div>
           }
         </div>
       </div>

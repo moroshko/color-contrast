@@ -1,5 +1,5 @@
 import number from 'utils/number';
-import color from 'utils/color';
+import colorUtils from 'utils/color';
 import {
   UPDATE_DESIRED_CONTRAST_RATIO,
   UPDATE_BACKGROUND_COLOR,
@@ -47,7 +47,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         backgroundColor: {
-          isValid: color.isValid(action.value),
+          isValid: colorUtils.isValid(action.value),
           value: action.value
         }
       };
@@ -56,7 +56,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         foregroundColor: {
-          isValid: color.isValid(action.value),
+          isValid: colorUtils.isValid(action.value),
           value: action.value
         }
       };
