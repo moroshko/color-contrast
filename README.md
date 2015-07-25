@@ -2,7 +2,6 @@
 
 ## Todo
 
-* Show 'Please fix errors'
 * Replace 'Desired contrast ratio' with 'AA' and 'AAA' options
 * For every line in preview, show whether it's accessible
 * Publish to Github pages

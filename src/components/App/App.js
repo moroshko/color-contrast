@@ -49,16 +49,19 @@ export default class App extends Component {
           </div>
         </div>
         <div className={styles.preview}>
-          {
-            this.isPreviewVisible() &&
-            <div>
-              <CurrentContrast backgroundColor={state.backgroundColor.value}
-                               foregroundColor={state.foregroundColor.value}
-                               desiredContrastRatio={state.desiredContrastRatio.value} />
-              <Preview backgroundColor={state.backgroundColor.value}
-                       foregroundColor={state.foregroundColor.value} />
-            </div>
-          }
+          {do {
+            if (this.isPreviewVisible()) {
+              <div>
+                <CurrentContrast backgroundColor={state.backgroundColor.value}
+                                 foregroundColor={state.foregroundColor.value}
+                                 desiredContrastRatio={state.desiredContrastRatio.value} />
+                <Preview backgroundColor={state.backgroundColor.value}
+                         foregroundColor={state.foregroundColor.value} />
+              </div>
+            } else {
+              'Please fix errors'
+            }
+          }}
         </div>
       </div>
     );
