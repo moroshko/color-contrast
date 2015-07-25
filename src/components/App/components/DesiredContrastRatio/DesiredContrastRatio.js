@@ -6,11 +6,11 @@ export default class DesiredContrastRatio extends Component {
   static propTypes = {
     isValid: PropTypes.bool.isRequired,
     value: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired
+    updateDesiredContrastRatio: PropTypes.func.isRequired
   };
 
   render() {
-    const { isValid, value, onChange } = this.props;
+    const { isValid, value, updateDesiredContrastRatio } = this.props;
     const id = 'contrast-ratio';
 
     return (
@@ -21,7 +21,7 @@ export default class DesiredContrastRatio extends Component {
         <div className={styles.field}>
           <input id={id} className={!isValid && styles.error}
                  type="text" value={value}
-                 onChange={event => onChange(event.currentTarget.value)} />
+                 onChange={event => updateDesiredContrastRatio(event.currentTarget.value)} />
           <div className={styles.helpText}>between 1 and 21</div>
         </div>
       </div>

@@ -2,7 +2,7 @@ import styles from './App.less';
 
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
-import * as actionCreators from 'flux/actionCreators';
+import actionCreators from 'flux/actionCreators';
 import DesiredContrastRatio from 'DesiredContrastRatio/DesiredContrastRatio';
 import BackgroundColor from 'BackgroundColor/BackgroundColor';
 import SwitchColors from 'SwitchColors/SwitchColors';
@@ -25,28 +25,26 @@ export default class App extends Component {
 
   render() {
     const { state, dispatch } = this.props;
-    const { switchColors } = actionCreators;
+    const { updateDesiredContrastRatio, updateBackgroundColor,
+            switchColors, updateForegroundColor } = actionCreators;
 
     return (
       <div className={styles.container}>
         <div>
           <div className={styles.field}>
-            <DesiredContrastRatio
-              {...state.desiredContrastRatio}
-              onChange={value => dispatch(actionCreators.updateDesiredContrastRatio(value))} />
+            <DesiredContrastRatio {...state.desiredContrastRatio}
+                                  {...bindActionCreators({ updateDesiredContrastRatio }, dispatch)} />
           </div>
           <div className={styles.field}>
-            <BackgroundColor
-              {...state.backgroundColor}
-              onChange={value => dispatch(actionCreators.updateBackgroundColor(value))} />
+            <BackgroundColor {...state.backgroundColor}
+                             {...bindActionCreators({ updateBackgroundColor }, dispatch)} />
           </div>
           <div>
             <SwitchColors {...bindActionCreators({ switchColors }, dispatch)} />
           </div>
           <div className={styles.field}>
-            <ForegroundColor
-              {...state.foregroundColor}
-              onChange={value => dispatch(actionCreators.updateForegroundColor(value))} />
+            <ForegroundColor {...state.foregroundColor}
+                             {...bindActionCreators({ updateForegroundColor }, dispatch)} />
           </div>
         </div>
         <div className={styles.preview}>

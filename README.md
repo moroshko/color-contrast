@@ -2,7 +2,6 @@
 
 ## Todo
 
-* Add button to switch color and background color
 * Show current contrast
 * Add 'AA' and 'AAA' buttons for contrast
 
