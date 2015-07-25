@@ -8,7 +8,6 @@ import BackgroundColor from 'BackgroundColor/BackgroundColor';
 import SwitchColors from 'SwitchColors/SwitchColors';
 import ForegroundColor from 'ForegroundColor/ForegroundColor';
 import Font from 'Font/Font';
-import CurrentContrast from 'CurrentContrast/CurrentContrast';
 import Preview from 'Preview/Preview';
 
 export default class App extends Component {
@@ -57,13 +56,11 @@ export default class App extends Component {
         <div className={styles.preview}>
           {do {
             if (this.isPreviewVisible()) {
-              <div>
-                <CurrentContrast backgroundColor={state.backgroundColor.value}
-                                 foregroundColor={state.foregroundColor.value} />
-                <Preview accessibilityLevel={state.accessibilityLevel}
-                         backgroundColor={state.backgroundColor.value}
-                         foregroundColor={state.foregroundColor.value} />
-              </div>
+              <Preview accessibilityLevel={state.accessibilityLevel}
+                       backgroundColor={state.backgroundColor.value}
+                       foregroundColor={state.foregroundColor.value}
+                       fontSize={state.fontSize.value}
+                       isFontBold={state.isFontBold} />
             } else {
               'Please fix errors'
             }

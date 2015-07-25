@@ -2,35 +2,51 @@ import styles from './Preview.less';
 
 import React, { Component, PropTypes } from 'react';
 import colorUtils from 'utils/color';
-import accessibility from 'utils/accessibility';
-import AccessibilityIndicator from 'AccessibilityIndicator/AccessibilityIndicator';
+import accessibilityUtils from 'utils/accessibility';
 
 export default class Preview extends Component {
   static propTypes = {
     accessibilityLevel: PropTypes.string.isRequired,
     backgroundColor: PropTypes.string.isRequired,
-    foregroundColor: PropTypes.string.isRequired
+    foregroundColor: PropTypes.string.isRequired,
+    fontSize: PropTypes.string.isRequired,
+    isFontBold: PropTypes.bool.isRequired
   };
 
   render() {
-    const { accessibilityLevel, backgroundColor, foregroundColor } = this.props;
+    const { accessibilityLevel, backgroundColor, foregroundColor,
+            fontSize, isFontBold } = this.props;
     const contrast = colorUtils.contrast(backgroundColor, foregroundColor);
-    const { small, large } = accessibility[accessibilityLevel];
+    const accessibleContrast =
+      accessibilityUtils.accessibleContrast(accessibilityLevel, fontSize, isFontBold);
+    const isAccessible = (contrast >= accessibleContrast);
+    const style = {
+      color: foregroundColor,
+      backgroundColor,
+      fontSize: fontSize + 'px',
+      fontWeight: isFontBold ? 'bold' : 'normal'
+    };
 
     return (
-      <div className={styles.container}
-           style={{ color: foregroundColor, backgroundColor: backgroundColor }}>
-        <div className={styles.line} style={{ fontSize: '18px' }}>
-          <div>React is awesome (18px)</div>
-          <AccessibilityIndicator isAccessible={contrast > large} />
+      <div className={styles.container}>
+        <div className={styles.currentContrast}>
+          Current contrast: {contrast}
         </div>
-        <div className={styles.line} style={{ fontSize: '14px', fontWeight: 'bold' }}>
-          <div>Redux makes me smile (14px bold)</div>
-          <AccessibilityIndicator isAccessible={contrast > large} />
+        <div className={styles.accessibleContrast}>
+          Accessible contrast: {accessibleContrast}
         </div>
-        <div className={styles.line} style={{ fontSize: '14px' }}>
-          <div>CSS Modules are cool (14px)</div>
-          <AccessibilityIndicator isAccessible={contrast > small} />
+        <div className={styles.isAccessible}>
+          {do {
+            if (isAccessible) {
+              <span className={styles.accessible}>Accessible</span>
+            } else {
+              <span className={styles.notAccessible}>Not accessible</span>
+            }
+          }}
+        </div>
+        <div className={styles.text} style={style}>
+          To specify how the state tree is transformed by the actions,
+          you write pure reducers.
         </div>
       </div>
     );

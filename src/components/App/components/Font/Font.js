@@ -23,7 +23,7 @@ export default class Font extends Component {
         </label>
         <div className={styles.fontSizeContainer}>
           <input id={fontSizeId} className={!isValid && styles.error}
-                 type="text" value={value}
+                 type="number" value={value}
                  onChange={event => updateFontSize(event.currentTarget.value)} />
           <div className={styles.helpText}>between 8 and 50</div>
         </div>
