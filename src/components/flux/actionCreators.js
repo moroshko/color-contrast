@@ -1,13 +1,9 @@
-import {
-  UPDATE_DESIRED_CONTRAST_RATIO,
-  UPDATE_BACKGROUND_COLOR,
-  UPDATE_FOREGROUND_COLOR,
-  SWITCH_COLORS
-} from 'flux/constants';
+import { UPDATE_ACCESSIBILITY_LEVEL, UPDATE_BACKGROUND_COLOR,
+         UPDATE_FOREGROUND_COLOR, SWITCH_COLORS } from 'flux/constants';
 
-export function updateDesiredContrastRatio(value) {
+export function updateAccessibilityLevel(value) {
   return {
-    type: UPDATE_DESIRED_CONTRAST_RATIO,
+    type: UPDATE_ACCESSIBILITY_LEVEL,
     value
   };
 }

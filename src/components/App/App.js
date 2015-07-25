@@ -3,7 +3,7 @@ import styles from './App.less';
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from 'flux/actionCreators';
-import DesiredContrastRatio from 'DesiredContrastRatio/DesiredContrastRatio';
+import AccessibilityLevel from 'AccessibilityLevel/AccessibilityLevel';
 import BackgroundColor from 'BackgroundColor/BackgroundColor';
 import SwitchColors from 'SwitchColors/SwitchColors';
 import ForegroundColor from 'ForegroundColor/ForegroundColor';
@@ -19,22 +19,20 @@ export default class App extends Component {
   isPreviewVisible() {
     const { state } = this.props;
 
-    return state.desiredContrastRatio.isValid &&
-           state.backgroundColor.isValid &&
-           state.foregroundColor.isValid;
+    return state.backgroundColor.isValid && state.foregroundColor.isValid;
   }
 
   render() {
     const { state, dispatch } = this.props;
-    const { updateDesiredContrastRatio, updateBackgroundColor,
+    const { updateAccessibilityLevel, updateBackgroundColor,
             switchColors, updateForegroundColor } = actionCreators;
 
     return (
       <div className={styles.container}>
         <div>
           <div className={styles.field}>
-            <DesiredContrastRatio {...state.desiredContrastRatio}
-                                  {...bindActionCreators({ updateDesiredContrastRatio }, dispatch)} />
+            <AccessibilityLevel accessibilityLevel={state.accessibilityLevel}
+                                {...bindActionCreators({ updateAccessibilityLevel }, dispatch)} />
           </div>
           <div className={styles.field}>
             <BackgroundColor {...state.backgroundColor}
@@ -53,8 +51,7 @@ export default class App extends Component {
             if (this.isPreviewVisible()) {
               <div>
                 <CurrentContrast backgroundColor={state.backgroundColor.value}
-                                 foregroundColor={state.foregroundColor.value}
-                                 desiredContrastRatio={state.desiredContrastRatio.value} />
+                                 foregroundColor={state.foregroundColor.value} />
                 <Preview backgroundColor={state.backgroundColor.value}
                          foregroundColor={state.foregroundColor.value} />
               </div>

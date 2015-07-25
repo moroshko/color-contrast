@@ -1,17 +1,9 @@
-import number from 'utils/number';
 import colorUtils from 'utils/color';
-import {
-  UPDATE_DESIRED_CONTRAST_RATIO,
-  UPDATE_BACKGROUND_COLOR,
-  UPDATE_FOREGROUND_COLOR,
-  SWITCH_COLORS
-} from 'flux/constants';
+import { UPDATE_ACCESSIBILITY_LEVEL, UPDATE_BACKGROUND_COLOR,
+         UPDATE_FOREGROUND_COLOR, SWITCH_COLORS } from 'flux/constants';
 
 const initialState = {
-  desiredContrastRatio: {
-    isValid: true,
-    value: '4.5'
-  },
+  accessibilityLevel: 'AA',
   backgroundColor: {
     isValid: true,
     value: '#eeeeee'
@@ -24,23 +16,10 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case UPDATE_DESIRED_CONTRAST_RATIO:
-      let isValid = number.isFloat(action.value);
-
-      if (isValid) {
-        const float = parseFloat(action.value);
-
-        if (float < 1 || float > 21) {
-          isValid = false;
-        }
-      }
-
+    case UPDATE_ACCESSIBILITY_LEVEL:
       return {
         ...state,
-        desiredContrastRatio: {
-          isValid,
-          value: action.value
-        }
+        accessibilityLevel: action.value
       };
 
     case UPDATE_BACKGROUND_COLOR:

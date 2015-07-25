@@ -12,7 +12,7 @@ export default class SwitchColors extends Component {
 
     return (
       <div className={styles.container}>
-        <button className={styles.button} onClick={switchColors}>
+        <button type="button" className={styles.button} onClick={switchColors}>
           ⇅
         </button>
       </div>
