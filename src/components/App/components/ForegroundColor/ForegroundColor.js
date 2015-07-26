@@ -1,6 +1,7 @@
 import styles from './ForegroundColor.less';
 
 import React, { Component, PropTypes } from 'react';
+import Color from 'Color/Color';
 
 export default class ForegroundColor extends Component {
   static propTypes = {
@@ -18,9 +19,8 @@ export default class ForegroundColor extends Component {
         <label className={styles.label} htmlFor={id}>
           Foreground color:
         </label>
-        <input id={id} className={!isValid && styles.error}
-               type="text" value={value}
-               onChange={event => updateForegroundColor(event.currentTarget.value)} />
+        <Color id={id} isValid={isValid} value={value}
+               updateValue={updateForegroundColor} />
       </div>
     );
   }
