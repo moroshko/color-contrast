@@ -12,8 +12,6 @@
     "dist": "rm -rf dist/; mkdir dist; cp src/index.html dist/; webpack --config webpack.prod.config.js"
   },
   "dependencies": {
-    "color": "^0.10.1",
-    "json-loader": "^0.5.2",
     "react": "^0.14.0-beta1",
     "react-dom": "^0.14.0-beta1"
   },

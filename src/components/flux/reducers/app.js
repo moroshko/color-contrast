@@ -3,23 +3,44 @@ import numberUtils from 'utils/number';
 import {
   UPDATE_ACCESSIBILITY_LEVEL,
   UPDATE_BACKGROUND_COLOR_VALUE,
+  UPDATE_BACKGROUND_COLOR_HUE,
+  UPDATE_BACKGROUND_COLOR_SATURATION,
+  UPDATE_BACKGROUND_COLOR_LIGHTNESS,
   SWITCH_COLORS,
   UPDATE_FOREGROUND_COLOR_VALUE,
+  UPDATE_FOREGROUND_COLOR_HUE,
+  UPDATE_FOREGROUND_COLOR_SATURATION,
+  UPDATE_FOREGROUND_COLOR_LIGHTNESS,
   UPDATE_FONT_SIZE,
   TOGGLE_IS_FONT_BOLD
 } from 'flux/constants/actionTypes/app';
-import { UPDATE_COLOR_VALUE } from 'flux/constants/actionTypes/color';
+import {
+  UPDATE_COLOR_VALUE,
+  UPDATE_COLOR_HUE,
+  UPDATE_COLOR_SATURATION,
+  UPDATE_COLOR_LIGHTNESS
+} from 'flux/constants/actionTypes/color';
 import colorReducer from 'flux/reducers/color';
 
+const initialBackgroundColor = '#eeeeee';
+const initialForegroundColor = '#767676';
+const initialBackgroundColorHSL = colorUtils.str2hsl(initialBackgroundColor);
+const initialForegroundColorHSL = colorUtils.str2hsl(initialForegroundColor);
 const initialState = {
   accessibilityLevel: 'AA',
   backgroundColor: {
     isValid: true,
-    value: '#eeeeee'
+    value: initialBackgroundColor,
+    hue: initialBackgroundColorHSL.h,
+    saturation: initialBackgroundColorHSL.s,
+    lightness: initialBackgroundColorHSL.l
   },
   foregroundColor: {
     isValid: true,
-    value: '#767676'
+    value: initialForegroundColor,
+    hue: initialForegroundColorHSL.h,
+    saturation: initialForegroundColorHSL.s,
+    lightness: initialForegroundColorHSL.l
   },
   fontSize: {
     isValid: true,
@@ -45,6 +66,33 @@ export default function(state = initialState, action) {
         })
       };
 
+    case UPDATE_BACKGROUND_COLOR_HUE:
+      return {
+        ...state,
+        backgroundColor: colorReducer(state.backgroundColor, {
+          type: UPDATE_COLOR_HUE,
+          value: action.value
+        })
+      };
+
+    case UPDATE_BACKGROUND_COLOR_SATURATION:
+      return {
+        ...state,
+        backgroundColor: colorReducer(state.backgroundColor, {
+          type: UPDATE_COLOR_SATURATION,
+          value: action.value
+        })
+      };
+
+    case UPDATE_BACKGROUND_COLOR_LIGHTNESS:
+      return {
+        ...state,
+        backgroundColor: colorReducer(state.backgroundColor, {
+          type: UPDATE_COLOR_LIGHTNESS,
+          value: action.value
+        })
+      };
+
     case SWITCH_COLORS:
       return {
         ...state,
@@ -57,6 +105,33 @@ export default function(state = initialState, action) {
         ...state,
         foregroundColor: colorReducer(state.foregroundColor, {
           type: UPDATE_COLOR_VALUE,
+          value: action.value
+        })
+      };
+
+    case UPDATE_FOREGROUND_COLOR_HUE:
+      return {
+        ...state,
+        foregroundColor: colorReducer(state.foregroundColor, {
+          type: UPDATE_COLOR_HUE,
+          value: action.value
+        })
+      };
+
+    case UPDATE_FOREGROUND_COLOR_SATURATION:
+      return {
+        ...state,
+        foregroundColor: colorReducer(state.foregroundColor, {
+          type: UPDATE_COLOR_SATURATION,
+          value: action.value
+        })
+      };
+
+    case UPDATE_FOREGROUND_COLOR_LIGHTNESS:
+      return {
+        ...state,
+        foregroundColor: colorReducer(state.foregroundColor, {
+          type: UPDATE_COLOR_LIGHTNESS,
           value: action.value
         })
       };

@@ -26,8 +26,12 @@ export default class App extends Component {
 
   render() {
     const { state, dispatch } = this.props;
-    const { updateAccessibilityLevel, updateBackgroundColorValue, switchColors,
-            updateForegroundColorValue, updateFontSize, toggleIsFontBold } = actionCreators;
+    const { updateAccessibilityLevel, updateBackgroundColorValue,
+            updateBackgroundColorHue, updateBackgroundColorSaturation,
+            updateBackgroundColorLightness, switchColors,
+            updateForegroundColorValue, updateForegroundColorHue,
+            updateForegroundColorSaturation, updateForegroundColorLightness,
+            updateFontSize, toggleIsFontBold } = actionCreators;
 
     return (
       <div className={styles.container}>
@@ -38,14 +42,20 @@ export default class App extends Component {
           </div>
           <div className={styles.field}>
             <BackgroundColor {...state.backgroundColor}
-                             updateValue={value => dispatch(updateBackgroundColorValue(value))} />
+                             updateValue={value => dispatch(updateBackgroundColorValue(value))}
+                             updateHue={value => dispatch(updateBackgroundColorHue(value))}
+                             updateSaturation={value => dispatch(updateBackgroundColorSaturation(value))}
+                             updateLightness={value => dispatch(updateBackgroundColorLightness(value))} />
           </div>
           <div>
             <SwitchColors {...bindActionCreators({ switchColors }, dispatch)} />
           </div>
           <div className={styles.field}>
             <ForegroundColor {...state.foregroundColor}
-                             updateValue={value => dispatch(updateForegroundColorValue(value))} />
+                             updateValue={value => dispatch(updateForegroundColorValue(value))}
+                             updateHue={value => dispatch(updateForegroundColorHue(value))}
+                             updateSaturation={value => dispatch(updateForegroundColorSaturation(value))}
+                             updateLightness={value => dispatch(updateForegroundColorLightness(value))} />
           </div>
           <div className={styles.field}>
             <Font {...state.fontSize} isBold={state.isFontBold}

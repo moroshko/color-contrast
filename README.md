@@ -2,9 +2,8 @@
 
 ## Todo
 
-* Remove old `contrast` function
-* Remove `color` dependency
-* Add background color lightness and foreground color lightness number fields
+* isValid => isValueValid
+* Add `step`, `min`, `max` to H, S, L fields
 * Publish to Github pages
 * Add CNAME and submit PR to js.org
 * Add eslint
