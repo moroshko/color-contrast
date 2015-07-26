@@ -7,11 +7,11 @@ export default class BackgroundColor extends Component {
   static propTypes = {
     isValid: PropTypes.bool.isRequired,
     value: PropTypes.string.isRequired,
-    updateBackgroundColor: PropTypes.func.isRequired
+    updateValue: PropTypes.func.isRequired
   };
 
   render() {
-    const { isValid, value, updateBackgroundColor } = this.props;
+    const { isValid, value, updateValue } = this.props;
     const id = 'background-color';
 
     return (
@@ -19,8 +19,8 @@ export default class BackgroundColor extends Component {
         <label className={styles.label} htmlFor={id}>
           Background color:
         </label>
-        <Color id={id} isValid={isValid} value={value}
-               updateValue={updateBackgroundColor} />
+        <Color id={id} isValid={isValid}
+               value={value} updateValue={updateValue} />
       </div>
     );
   }

@@ -1,0 +1,1 @@
+export const UPDATE_COLOR_VALUE = 'UPDATE_COLOR_VALUE';

@@ -2,7 +2,7 @@ import styles from './App.less';
 
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
-import * as actionCreators from 'flux/actionCreators';
+import * as actionCreators from 'flux/actionCreators/app';
 import AccessibilityLevel from 'AccessibilityLevel/AccessibilityLevel';
 import BackgroundColor from 'BackgroundColor/BackgroundColor';
 import SwitchColors from 'SwitchColors/SwitchColors';
@@ -26,9 +26,8 @@ export default class App extends Component {
 
   render() {
     const { state, dispatch } = this.props;
-    const { updateAccessibilityLevel, updateBackgroundColor,
-            switchColors, updateForegroundColor, updateFontSize,
-            toggleIsFontBold } = actionCreators;
+    const { updateAccessibilityLevel, updateBackgroundColorValue, switchColors,
+            updateForegroundColorValue, updateFontSize, toggleIsFontBold } = actionCreators;
 
     return (
       <div className={styles.container}>
@@ -39,14 +38,14 @@ export default class App extends Component {
           </div>
           <div className={styles.field}>
             <BackgroundColor {...state.backgroundColor}
-                             {...bindActionCreators({ updateBackgroundColor }, dispatch)} />
+                             updateValue={value => dispatch(updateBackgroundColorValue(value))} />
           </div>
           <div>
             <SwitchColors {...bindActionCreators({ switchColors }, dispatch)} />
           </div>
           <div className={styles.field}>
             <ForegroundColor {...state.foregroundColor}
-                             {...bindActionCreators({ updateForegroundColor }, dispatch)} />
+                             updateValue={value => dispatch(updateForegroundColorValue(value))} />
           </div>
           <div className={styles.field}>
             <Font {...state.fontSize} isBold={state.isFontBold}

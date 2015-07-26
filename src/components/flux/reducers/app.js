@@ -1,8 +1,15 @@
 import colorUtils from 'utils/color';
 import numberUtils from 'utils/number';
-import { UPDATE_ACCESSIBILITY_LEVEL, UPDATE_BACKGROUND_COLOR,
-         SWITCH_COLORS, UPDATE_FOREGROUND_COLOR, UPDATE_FONT_SIZE,
-         TOGGLE_IS_FONT_BOLD } from 'flux/constants';
+import {
+  UPDATE_ACCESSIBILITY_LEVEL,
+  UPDATE_BACKGROUND_COLOR_VALUE,
+  SWITCH_COLORS,
+  UPDATE_FOREGROUND_COLOR_VALUE,
+  UPDATE_FONT_SIZE,
+  TOGGLE_IS_FONT_BOLD
+} from 'flux/constants/actionTypes/app';
+import { UPDATE_COLOR_VALUE } from 'flux/constants/actionTypes/color';
+import colorReducer from 'flux/reducers/color';
 
 const initialState = {
   accessibilityLevel: 'AA',
@@ -29,13 +36,13 @@ export default function(state = initialState, action) {
         accessibilityLevel: action.value
       };
 
-    case UPDATE_BACKGROUND_COLOR:
+    case UPDATE_BACKGROUND_COLOR_VALUE:
       return {
         ...state,
-        backgroundColor: {
-          isValid: colorUtils.isValid(action.value),
+        backgroundColor: colorReducer(state.backgroundColor, {
+          type: UPDATE_COLOR_VALUE,
           value: action.value
-        }
+        })
       };
 
     case SWITCH_COLORS:
@@ -45,13 +52,13 @@ export default function(state = initialState, action) {
         foregroundColor: {...state.backgroundColor}
       };
 
-    case UPDATE_FOREGROUND_COLOR:
+    case UPDATE_FOREGROUND_COLOR_VALUE:
       return {
         ...state,
-        foregroundColor: {
-          isValid: colorUtils.isValid(action.value),
+        foregroundColor: colorReducer(state.foregroundColor, {
+          type: UPDATE_COLOR_VALUE,
           value: action.value
-        }
+        })
       };
 
     case UPDATE_FONT_SIZE:
