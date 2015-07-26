@@ -2,6 +2,7 @@
 
 ## Todo
 
+* Remove old `contrast` function
 * Remove `color` dependency
 * Add background color lightness and foreground color lightness number fields
 * Publish to Github pages

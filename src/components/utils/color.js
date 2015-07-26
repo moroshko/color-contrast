@@ -14,10 +14,11 @@ function contrast(color1, color2) {
   return null;
 }
 
-function rgb2hsl(rgb) {
-  const r = rgb.r / 255;
-  const g = rgb.g / 255;
-  const b = rgb.b / 255;
+function rgb2hsl({ r, g, b }) {
+  r = r / 255;
+  g = g / 255;
+  b = b / 255;
+
   const min = Math.min(r, g, b);
   const max = Math.max(r, g, b);
   const delta = max - min;
@@ -56,8 +57,36 @@ function rgb2hsl(rgb) {
   return { h, s, l };
 }
 
+// http://www.w3.org/WAI/GL/wiki/Relative_luminance
+function relativeLuminance({ r, g, b }) {
+  [r, g, b] = [r, g, b].map(c => {
+    c = c / 255;
+
+    if (c <= 0.03928) {
+      return c / 12.92;
+    }
+
+    return Math.pow((c + 0.055) / 1.055, 2.4);
+  });
+
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+// http://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html#key-terms
+function contrastRatio(rgb1, rgb2) {
+  const L1 = relativeLuminance(rgb1);
+  const L2 = relativeLuminance(rgb2);
+
+  if (L1 < L2) {
+    return (L2 + 0.05) / (L1 + 0.05);
+  }
+
+  return (L1 + 0.05) / (L2 + 0.05);
+}
+
 export default {
   isValid,
   contrast,
-  rgb2hsl
+  rgb2hsl,
+  contrastRatio
 };
