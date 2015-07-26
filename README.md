@@ -2,6 +2,7 @@
 
 ## Todo
 
+* Remove `color` dependency
 * Add background color lightness and foreground color lightness number fields
 * Publish to Github pages
 * Add CNAME and submit PR to js.org
