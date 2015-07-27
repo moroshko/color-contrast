@@ -2,7 +2,7 @@
 
 ## Todo
 
-* What if both H and S are invalid?
+* Add tests for reducers
 * Publish to Github pages
 * Add CNAME and submit PR to js.org
 * Add eslint
