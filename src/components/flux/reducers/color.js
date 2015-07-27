@@ -12,62 +12,76 @@ export default function(state, action) {
         saturation, isSaturationValid,
         lightness, isLightnessValid } = state;
 
+  function updateHSLifValueValid() {
+    if (isValueValid) {
+      const { h, s, l } = colorUtils.str2hsl(value);
+
+      isHueValid = true;
+      hue = h.toString();
+      isSaturationValid = true;
+      saturation = s.toString();
+      isLightnessValid = true;
+      lightness = l.toString();
+    }
+
+    return {
+      isValueValid,
+      value,
+      isHueValid,
+      hue,
+      isSaturationValid,
+      saturation,
+      isLightnessValid,
+      lightness
+    };
+  }
+
+  function updateValueIfHSLvalid() {
+    if (isHueValid && isSaturationValid && isLightnessValid) {
+      isValueValid = true;
+      value = colorUtils.hsl2str({
+        h: parseFloat(hue),
+        s: parseFloat(saturation),
+        l: parseFloat(lightness)
+      });
+    }
+
+    return {
+      isValueValid,
+      value,
+      isHueValid,
+      hue,
+      isSaturationValid,
+      saturation,
+      isLightnessValid,
+      lightness
+    };
+  }
+
   switch (action.type) {
     case UPDATE_COLOR_VALUE:
       value = action.value;
       isValueValid = colorUtils.isValueValid(value);
 
-      if (isValueValid) {
-        const hsl = colorUtils.str2hsl(value);
-
-        isHueValid = true;
-        hue = hsl.h.toString();
-        isSaturationValid = true;
-        saturation = hsl.s.toString();
-        isLightnessValid = true;
-        lightness = hsl.l.toString();
-      }
-
-      return {
-        isValueValid,
-        value,
-        isHueValid,
-        hue,
-        isSaturationValid,
-        saturation,
-        isLightnessValid,
-        lightness
-      };
+      return updateHSLifValueValid();
 
     case UPDATE_COLOR_HUE:
       hue = action.hue;
       isHueValid = colorUtils.isHueValid(hue);
 
-      if (isHueValid && state.isSaturationValid && state.isLightnessValid) {
-        isValueValid = true;
-        value = colorUtils.hsl2str({
-          h: parseFloat(hue),
-          s: parseFloat(saturation),
-          l: parseFloat(lightness)
-        });
-      }
-
-      return {
-        isValueValid,
-        value,
-        isHueValid,
-        hue,
-        isSaturationValid,
-        saturation,
-        isLightnessValid,
-        lightness
-      };
+      return updateValueIfHSLvalid();
 
     case UPDATE_COLOR_SATURATION:
-      return state;
+      saturation = action.saturation;
+      isSaturationValid = colorUtils.isSaturationValid(saturation);
+
+      return updateValueIfHSLvalid();
 
     case UPDATE_COLOR_LIGHTNESS:
-      return state;
+      lightness = action.lightness;
+      isLightnessValid = colorUtils.isLightnessValid(lightness);
+
+      return updateValueIfHSLvalid();
 
     default:
       return state;
