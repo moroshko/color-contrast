@@ -5,20 +5,24 @@ import Color from 'Color/Color';
 
 export default class ForegroundColor extends Component {
   static propTypes = {
-    isValid: PropTypes.bool.isRequired,
+    isValueValid: PropTypes.bool.isRequired,
     value: PropTypes.string.isRequired,
     updateValue: PropTypes.func.isRequired,
-    hue: PropTypes.number.isRequired,
+    isHueValid: PropTypes.bool.isRequired,
+    hue: PropTypes.string.isRequired,
     updateHue: PropTypes.func.isRequired,
-    saturation: PropTypes.number.isRequired,
+    isSaturationValid: PropTypes.bool.isRequired,
+    saturation: PropTypes.string.isRequired,
     updateSaturation: PropTypes.func.isRequired,
-    lightness: PropTypes.number.isRequired,
+    isLightnessValid: PropTypes.bool.isRequired,
+    lightness: PropTypes.string.isRequired,
     updateLightness: PropTypes.func.isRequired
   };
 
   render() {
-    const { isValid, value, updateValue, hue, updateHue, saturation,
-            updateSaturation, lightness, updateLightness } = this.props;
+    const { isValueValid, value, updateValue, isHueValid, hue, updateHue,
+            isSaturationValid, saturation, updateSaturation, isLightnessValid,
+            lightness, updateLightness } = this.props;
     const id = 'foreground-color';
 
     return (
@@ -26,11 +30,13 @@ export default class ForegroundColor extends Component {
         <label className={styles.label} htmlFor={id}>
           Foreground color:
         </label>
-        <Color id={id} isValid={isValid}
+        <Color id={id} isValueValid={isValueValid}
                value={value} updateValue={updateValue}
-               hue={hue} updateHue={updateHue}
-               saturation={saturation} updateSaturation={updateSaturation}
-               lightness={lightness} updateLightness={updateLightness} />
+               isHueValid={isHueValid} hue={hue} updateHue={updateHue}
+               isSaturationValid={isSaturationValid} saturation={saturation}
+               updateSaturation={updateSaturation}
+               isLightnessValid={isLightnessValid} lightness={lightness}
+               updateLightness={updateLightness} />
       </div>
     );
   }

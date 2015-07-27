@@ -27,24 +27,24 @@ export function updateBackgroundColorValue(value) {
   };
 }
 
-export function updateBackgroundColorHue(value) {
+export function updateBackgroundColorHue(hue) {
   return {
     type: UPDATE_BACKGROUND_COLOR_HUE,
-    value
+    hue
   };
 }
 
-export function updateBackgroundColorSaturation(value) {
+export function updateBackgroundColorSaturation(saturation) {
   return {
     type: UPDATE_BACKGROUND_COLOR_SATURATION,
-    value
+    saturation
   };
 }
 
-export function updateBackgroundColorLightness(value) {
+export function updateBackgroundColorLightness(lightness) {
   return {
     type: UPDATE_BACKGROUND_COLOR_LIGHTNESS,
-    value
+    lightness
   };
 }
 
@@ -61,24 +61,24 @@ export function updateForegroundColorValue(value) {
   };
 }
 
-export function updateForegroundColorHue(value) {
+export function updateForegroundColorHue(hue) {
   return {
     type: UPDATE_FOREGROUND_COLOR_HUE,
-    value
+    hue
   };
 }
 
-export function updateForegroundColorSaturation(value) {
+export function updateForegroundColorSaturation(saturation) {
   return {
     type: UPDATE_FOREGROUND_COLOR_SATURATION,
-    value
+    saturation
   };
 }
 
-export function updateForegroundColorLightness(value) {
+export function updateForegroundColorLightness(lightness) {
   return {
     type: UPDATE_FOREGROUND_COLOR_LIGHTNESS,
-    value
+    lightness
   };
 }
 

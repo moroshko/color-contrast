@@ -2,8 +2,7 @@
 
 ## Todo
 
-* isValid => isValueValid
-* Add `step`, `min`, `max` to H, S, L fields
+* What if both H and S are invalid?
 * Publish to Github pages
 * Add CNAME and submit PR to js.org
 * Add eslint

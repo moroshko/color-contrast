@@ -29,18 +29,24 @@ const initialForegroundColorHSL = colorUtils.str2hsl(initialForegroundColor);
 const initialState = {
   accessibilityLevel: 'AA',
   backgroundColor: {
-    isValid: true,
+    isValueValid: true,
     value: initialBackgroundColor,
-    hue: initialBackgroundColorHSL.h,
-    saturation: initialBackgroundColorHSL.s,
-    lightness: initialBackgroundColorHSL.l
+    isHueValid: true,
+    hue: initialBackgroundColorHSL.h.toString(),
+    isSaturationValid: true,
+    saturation: initialBackgroundColorHSL.s.toString(),
+    isLightnessValid: true,
+    lightness: initialBackgroundColorHSL.l.toString()
   },
   foregroundColor: {
-    isValid: true,
+    isValueValid: true,
     value: initialForegroundColor,
-    hue: initialForegroundColorHSL.h,
-    saturation: initialForegroundColorHSL.s,
-    lightness: initialForegroundColorHSL.l
+    isHueValid: true,
+    hue: initialForegroundColorHSL.h.toString(),
+    isSaturationValid: true,
+    saturation: initialForegroundColorHSL.s.toString(),
+    isLightnessValid: true,
+    lightness: initialForegroundColorHSL.l.toString()
   },
   fontSize: {
     isValid: true,
@@ -71,7 +77,7 @@ export default function(state = initialState, action) {
         ...state,
         backgroundColor: colorReducer(state.backgroundColor, {
           type: UPDATE_COLOR_HUE,
-          value: action.value
+          hue: action.hue
         })
       };
 
@@ -80,7 +86,7 @@ export default function(state = initialState, action) {
         ...state,
         backgroundColor: colorReducer(state.backgroundColor, {
           type: UPDATE_COLOR_SATURATION,
-          value: action.value
+          saturation: action.saturation
         })
       };
 
@@ -89,7 +95,7 @@ export default function(state = initialState, action) {
         ...state,
         backgroundColor: colorReducer(state.backgroundColor, {
           type: UPDATE_COLOR_LIGHTNESS,
-          value: action.value
+          lightness: action.lightness
         })
       };
 
@@ -114,7 +120,7 @@ export default function(state = initialState, action) {
         ...state,
         foregroundColor: colorReducer(state.foregroundColor, {
           type: UPDATE_COLOR_HUE,
-          value: action.value
+          hue: action.hue
         })
       };
 
@@ -123,7 +129,7 @@ export default function(state = initialState, action) {
         ...state,
         foregroundColor: colorReducer(state.foregroundColor, {
           type: UPDATE_COLOR_SATURATION,
-          value: action.value
+          saturation: action.saturation
         })
       };
 
@@ -132,7 +138,7 @@ export default function(state = initialState, action) {
         ...state,
         foregroundColor: colorReducer(state.foregroundColor, {
           type: UPDATE_COLOR_LIGHTNESS,
-          value: action.value
+          lightness: action.lightness
         })
       };
 

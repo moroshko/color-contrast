@@ -7,29 +7,61 @@ import {
 } from 'flux/constants/actionTypes/color';
 
 export default function(state, action) {
+  let { value, isValueValid,
+        hue, isHueValid,
+        saturation, isSaturationValid,
+        lightness, isLightnessValid } = state;
+
   switch (action.type) {
     case UPDATE_COLOR_VALUE:
-      const isValid = colorUtils.isValid(action.value);
-      let { hue, saturation, lightness } = state;
+      value = action.value;
+      isValueValid = colorUtils.isValueValid(value);
 
-      if (isValid) {
-        const hsl = colorUtils.str2hsl(action.value);
+      if (isValueValid) {
+        const hsl = colorUtils.str2hsl(value);
 
-        hue = hsl.h;
-        saturation = hsl.s;
-        lightness = hsl.l;
+        isHueValid = true;
+        hue = hsl.h.toString();
+        isSaturationValid = true;
+        saturation = hsl.s.toString();
+        isLightnessValid = true;
+        lightness = hsl.l.toString();
       }
 
       return {
-        isValid,
-        value: action.value,
+        isValueValid,
+        value,
+        isHueValid,
         hue,
+        isSaturationValid,
         saturation,
+        isLightnessValid,
         lightness
       };
 
     case UPDATE_COLOR_HUE:
-      return state;
+      hue = action.hue;
+      isHueValid = colorUtils.isHueValid(hue);
+
+      if (isHueValid && state.isSaturationValid && state.isLightnessValid) {
+        isValueValid = true;
+        value = colorUtils.hsl2str({
+          h: parseFloat(hue),
+          s: parseFloat(saturation),
+          l: parseFloat(lightness)
+        });
+      }
+
+      return {
+        isValueValid,
+        value,
+        isHueValid,
+        hue,
+        isSaturationValid,
+        saturation,
+        isLightnessValid,
+        lightness
+      };
 
     case UPDATE_COLOR_SATURATION:
       return state;

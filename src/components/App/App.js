@@ -19,8 +19,14 @@ export default class App extends Component {
   isPreviewVisible() {
     const { state } = this.props;
 
-    return state.backgroundColor.isValid &&
-           state.foregroundColor.isValid &&
+    return state.backgroundColor.isValueValid &&
+           state.backgroundColor.isHueValid &&
+           state.backgroundColor.isSaturationValid &&
+           state.backgroundColor.isLightnessValid &&
+           state.foregroundColor.isValueValid &&
+           state.foregroundColor.isHueValid &&
+           state.foregroundColor.isSaturationValid &&
+           state.foregroundColor.isLightnessValid &&
            state.fontSize.isValid;
   }
 

@@ -5,37 +5,41 @@ import React, { Component, PropTypes } from 'react';
 export default class Color extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
-    isValid: PropTypes.bool.isRequired,
+    isValueValid: PropTypes.bool.isRequired,
     value: PropTypes.string.isRequired,
     updateValue: PropTypes.func.isRequired,
-    hue: PropTypes.number.isRequired,
+    isHueValid: PropTypes.bool.isRequired,
+    hue: PropTypes.string.isRequired,
     updateHue: PropTypes.func.isRequired,
-    saturation: PropTypes.number.isRequired,
+    isSaturationValid: PropTypes.bool.isRequired,
+    saturation: PropTypes.string.isRequired,
     updateSaturation: PropTypes.func.isRequired,
-    lightness: PropTypes.number.isRequired,
+    isLightnessValid: PropTypes.bool.isRequired,
+    lightness: PropTypes.string.isRequired,
     updateLightness: PropTypes.func.isRequired
   };
 
   render() {
-    const { id, isValid, value, updateValue, hue, updateHue, saturation,
-            updateSaturation, lightness, updateLightness } = this.props;
+    const { id, isValueValid, value, updateValue, isHueValid, hue, updateHue,
+            isSaturationValid, saturation, updateSaturation, isLightnessValid,
+            lightness, updateLightness } = this.props;
 
     return (
       <span>
-        <input id={id} className={styles.stringField + (isValid ? '' : ' ' + styles.error)}
-               type="text" value={value}
+        <input id={id} type="text" value={value}
+               className={styles.stringField + (isValueValid ? '' : ' ' + styles.error)}
                onChange={event => updateValue(event.currentTarget.value)} />
         <label className={styles.hslLabel} htmlFor={id + '-h'}>H:</label>
-        <input id={id + '-h'} className={styles.hslField}
-               type="number" value={hue}
+        <input id={id + '-h'} type="number" min="0" max="360" value={hue}
+               className={styles.hslField + (isHueValid ? '' : ' ' + styles.error)}
                onChange={event => updateHue(event.currentTarget.value)} />
         <label className={styles.hslLabel} htmlFor={id + '-s'}>S:</label>
-        <input id={id + '-s'} className={styles.hslField}
-               type="number" value={saturation}
+        <input id={id + '-s'} type="number" min="0" max="100" value={saturation}
+               className={styles.hslField + (isSaturationValid ? '' : ' ' + styles.error)}
                onChange={event => updateSaturation(event.currentTarget.value)} />
         <label className={styles.hslLabel} htmlFor={id + '-l'}>L:</label>
-        <input id={id + '-l'} className={styles.hslField}
-               type="number" value={lightness}
+        <input id={id + '-l'} type="number" min="0" max="100" value={lightness}
+               className={styles.hslField + (isLightnessValid ? '' : ' ' + styles.error)}
                onChange={event => updateLightness(event.currentTarget.value)} />
       </span>
     );

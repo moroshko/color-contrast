@@ -1,9 +1,15 @@
+const FLOAT_REGEX = /^\d+(\.\d+)?$/;
 const THREE_DIGIT_HEX_COLOR_REGEX = /^#[0-9a-fA-F]{3}$/;
 const SIX_DIGIT_HEX_COLOR_REGEX = /^#[0-9a-fA-F]{6}$/;
 
-function isValid(str) {
-  return THREE_DIGIT_HEX_COLOR_REGEX.test(str) ||
-         SIX_DIGIT_HEX_COLOR_REGEX.test(str);
+function isFloatInRange(str, min, max) {
+  if (!FLOAT_REGEX.test(str)) {
+    return false;
+  }
+
+  const float = parseFloat(str);
+
+  return float >= min && float <= max;
 }
 
 function str2sixDigitHex(str) {
@@ -16,6 +22,42 @@ function str2sixDigitHex(str) {
   }
 
   return null;
+}
+
+function rgb2sixDigitHex({ r, g, b }) {
+  r = r.toString(16);
+  g = g.toString(16);
+  b = b.toString(16);
+
+  if (r.length === 1) {
+    r = '0' + r;
+  }
+
+  if (g.length === 1) {
+    g = '0' + g;
+  }
+
+  if (b.length === 1) {
+    b = '0' + b;
+  }
+
+  return '#' + r + g + b;
+}
+
+function isValueValid(str) {
+  return str2sixDigitHex(str) !== null;
+}
+
+function isHueValid(str) {
+  return isFloatInRange(str, 0, 360);
+}
+
+function isSaturationValid(str) {
+  return isFloatInRange(str, 0, 100);
+}
+
+function isLightnessValid(str) {
+  return isFloatInRange(str, 0, 100);
 }
 
 function str2rgb(str) {
@@ -75,6 +117,69 @@ function rgb2hsl({ r, g, b }) {
   return { h, s, l };
 }
 
+function hsl2rgb({ h, s, l }) {
+  var r, g, b, m, c, x;
+
+  if (!isFinite(h)) {
+    h = 0;
+  }
+
+  if (!isFinite(s)) {
+    s = 0;
+  }
+
+  if (!isFinite(l)) {
+    l = 0;
+  }
+
+  h /= 60;
+
+  if (h < 0) {
+    h = 6 - (-h % 6);
+  }
+
+  h %= 6;
+
+  s = Math.max(0, Math.min(1, s / 100));
+  l = Math.max(0, Math.min(1, l / 100));
+
+  c = (1 - Math.abs((2 * l) - 1)) * s;
+  x = c * (1 - Math.abs((h % 2) - 1));
+
+  if (h < 1) {
+    r = c;
+    g = x;
+    b = 0;
+  } else if (h < 2) {
+    r = x;
+    g = c;
+    b = 0;
+  } else if (h < 3) {
+    r = 0;
+    g = c;
+    b = x;
+  } else if (h < 4) {
+    r = 0;
+    g = x;
+    b = c;
+  } else if (h < 5) {
+    r = x;
+    g = 0;
+    b = c;
+  } else {
+    r = c;
+    g = 0;
+    b = x;
+  }
+
+  m = l - c / 2;
+  r = Math.round((r + m) * 255);
+  g = Math.round((g + m) * 255);
+  b = Math.round((b + m) * 255);
+
+  return { r, g, b };
+}
+
 function str2hsl(str) {
   const sixDigitHex = str2sixDigitHex(str);
 
@@ -89,6 +194,12 @@ function str2hsl(str) {
   }
 
   return rgb2hsl(rgb);
+}
+
+function hsl2str(hsl) {
+  const rgb = hsl2rgb(hsl);
+
+  return rgb2sixDigitHex(rgb);
 }
 
 // http://www.w3.org/WAI/GL/wiki/Relative_luminance
@@ -119,7 +230,11 @@ function contrast(str1, str2) {
 }
 
 export default {
-  isValid,
+  isValueValid,
+  isHueValid,
+  isSaturationValid,
+  isLightnessValid,
   contrast,
-  str2hsl
+  str2hsl,
+  hsl2str
 };
