@@ -22,8 +22,8 @@ import {
 } from 'flux/constants/actionTypes/color';
 import colorReducer from 'flux/reducers/color';
 
-const initialBackgroundColor = '#eeeeee';
-const initialForegroundColor = '#767676';
+const initialBackgroundColor = '#696DF9';
+const initialForegroundColor = '#F6F7AD';
 const initialBackgroundColorHSL = colorUtils.str2hsl(initialBackgroundColor);
 const initialForegroundColorHSL = colorUtils.str2hsl(initialForegroundColor);
 const initialState = {

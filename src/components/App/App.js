@@ -2,6 +2,7 @@ import styles from './App.less';
 
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
+import accessibilityUtils from 'utils/accessibility';
 import * as actionCreators from 'flux/actionCreators/app';
 import AccessibilityLevel from 'AccessibilityLevel/AccessibilityLevel';
 import BackgroundColor from 'BackgroundColor/BackgroundColor';
@@ -9,6 +10,7 @@ import SwitchColors from 'SwitchColors/SwitchColors';
 import ForegroundColor from 'ForegroundColor/ForegroundColor';
 import Font from 'Font/Font';
 import Preview from 'Preview/Preview';
+import Graph from 'Graph/Graph';
 
 export default class App extends Component {
   static propTypes = {
@@ -71,11 +73,18 @@ export default class App extends Component {
         <div className={styles.preview}>
           {do {
             if (this.isPreviewVisible()) {
-              <Preview accessibilityLevel={state.accessibilityLevel}
-                       backgroundColor={state.backgroundColor.value}
-                       foregroundColor={state.foregroundColor.value}
-                       fontSize={state.fontSize.value}
-                       isFontBold={state.isFontBold} />
+              <div>
+                <Preview accessibilityLevel={state.accessibilityLevel}
+                         backgroundColor={state.backgroundColor.value}
+                         foregroundColor={state.foregroundColor.value}
+                         fontSize={state.fontSize.value}
+                         isFontBold={state.isFontBold} />
+                <Graph isBackgroundColor={true}
+                       colorChannel={'lightness'}
+                       backgroundColor={state.backgroundColor}
+                       foregroundColor={state.foregroundColor}
+                       accessibleContrast={accessibilityUtils.accessibleContrast(state.accessibilityLevel, state.fontSize.value, state.isFontBold)} />
+              </div>
             } else {
               'Please fix errors'
             }
