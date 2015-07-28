@@ -35,14 +35,11 @@ export default class App extends Component {
   render() {
     const { state, dispatch } = this.props;
     const { updateAccessibilityLevel, updateBackgroundColorValue,
-            updateBackgroundColorHue, setBackgroundColorIsHueFocused,
-            updateBackgroundColorSaturation, setBackgroundColorIsSaturationFocused,
-            updateBackgroundColorLightness, setBackgroundColorIsLightnessFocused,
-            switchColors, updateForegroundColorValue,
-            updateForegroundColorHue, setForegroundColorIsHueFocused,
-            updateForegroundColorSaturation, setForegroundColorIsSaturationFocused,
-            updateForegroundColorLightness, setForegroundColorIsLightnessFocused,
-            updateFontSize, toggleIsFontBold } = actionCreators;
+            updateBackgroundColorHue, updateBackgroundColorSaturation,
+            updateBackgroundColorLightness, switchColors,
+            updateForegroundColorValue, updateForegroundColorHue,
+            updateForegroundColorSaturation, updateForegroundColorLightness,
+            updateFontSize, toggleIsFontBold, updateFocusedChannel } = actionCreators;
 
     return (
       <div className={styles.container}>
@@ -55,11 +52,11 @@ export default class App extends Component {
             <BackgroundColor {...state.backgroundColor}
                              updateValue={value => dispatch(updateBackgroundColorValue(value))}
                              updateHue={value => dispatch(updateBackgroundColorHue(value))}
-                             onHueFocus={() => dispatch(setBackgroundColorIsHueFocused())}
+                             onHueFocus={() => dispatch(updateFocusedChannel(true, 'hue'))}
                              updateSaturation={value => dispatch(updateBackgroundColorSaturation(value))}
-                             onSaturationFocus={() => dispatch(setBackgroundColorIsSaturationFocused())}
+                             onSaturationFocus={() => dispatch(updateFocusedChannel(true, 'saturation'))}
                              updateLightness={value => dispatch(updateBackgroundColorLightness(value))}
-                             onLightnessFocus={() => dispatch(setBackgroundColorIsLightnessFocused())} />
+                             onLightnessFocus={() => dispatch(updateFocusedChannel(true, 'lightness'))} />
           </div>
           <div>
             <SwitchColors {...bindActionCreators({ switchColors }, dispatch)} />
@@ -68,11 +65,11 @@ export default class App extends Component {
             <ForegroundColor {...state.foregroundColor}
                              updateValue={value => dispatch(updateForegroundColorValue(value))}
                              updateHue={value => dispatch(updateForegroundColorHue(value))}
-                             onHueFocus={() => dispatch(setForegroundColorIsHueFocused())}
+                             onHueFocus={() => dispatch(updateFocusedChannel(false, 'hue'))}
                              updateSaturation={value => dispatch(updateForegroundColorSaturation(value))}
-                             onSaturationFocus={() => dispatch(setForegroundColorIsSaturationFocused())}
+                             onSaturationFocus={() => dispatch(updateFocusedChannel(false, 'saturation'))}
                              updateLightness={value => dispatch(updateForegroundColorLightness(value))}
-                             onLightnessFocus={() => dispatch(setForegroundColorIsLightnessFocused())} />
+                             onLightnessFocus={() => dispatch(updateFocusedChannel(false, 'lightness'))} />
           </div>
           <div className={styles.field}>
             <Font {...state.fontSize} isBold={state.isFontBold}
