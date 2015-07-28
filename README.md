@@ -2,6 +2,7 @@
 
 ## Todo
 
+* Add accessible contrast value on x axis
 * Add tests for reducers
 * Publish to Github pages
 * https://github.com/js-org/dns.js.org

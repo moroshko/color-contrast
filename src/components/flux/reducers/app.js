@@ -4,13 +4,19 @@ import {
   UPDATE_ACCESSIBILITY_LEVEL,
   UPDATE_BACKGROUND_COLOR_VALUE,
   UPDATE_BACKGROUND_COLOR_HUE,
+  SET_BACKGROUND_COLOR_IS_HUE_FOCUSED,
   UPDATE_BACKGROUND_COLOR_SATURATION,
+  SET_BACKGROUND_COLOR_IS_SATURATION_FOCUSED,
   UPDATE_BACKGROUND_COLOR_LIGHTNESS,
+  SET_BACKGROUND_COLOR_IS_LIGHTNESS_FOCUSED,
   SWITCH_COLORS,
   UPDATE_FOREGROUND_COLOR_VALUE,
   UPDATE_FOREGROUND_COLOR_HUE,
+  SET_FOREGROUND_COLOR_IS_HUE_FOCUSED,
   UPDATE_FOREGROUND_COLOR_SATURATION,
+  SET_FOREGROUND_COLOR_IS_SATURATION_FOCUSED,
   UPDATE_FOREGROUND_COLOR_LIGHTNESS,
+  SET_FOREGROUND_COLOR_IS_LIGHTNESS_FOCUSED,
   UPDATE_FONT_SIZE,
   TOGGLE_IS_FONT_BOLD
 } from 'flux/constants/actionTypes/app';
@@ -52,7 +58,8 @@ const initialState = {
     isValid: true,
     value: '14'
   },
-  isFontBold: false
+  isFontBold: false,
+  focusedChannel: null
 };
 
 export default function(state = initialState, action) {
@@ -81,6 +88,15 @@ export default function(state = initialState, action) {
         })
       };
 
+    case SET_BACKGROUND_COLOR_IS_HUE_FOCUSED:
+      return {
+        ...state,
+        focusedChannel: {
+          isBackgroundColor: true,
+          colorChannel: 'hue'
+        }
+      };
+
     case UPDATE_BACKGROUND_COLOR_SATURATION:
       return {
         ...state,
@@ -90,6 +106,15 @@ export default function(state = initialState, action) {
         })
       };
 
+    case SET_BACKGROUND_COLOR_IS_SATURATION_FOCUSED:
+      return {
+        ...state,
+        focusedChannel: {
+          isBackgroundColor: true,
+          colorChannel: 'saturation'
+        }
+      };
+
     case UPDATE_BACKGROUND_COLOR_LIGHTNESS:
       return {
         ...state,
@@ -97,6 +122,15 @@ export default function(state = initialState, action) {
           type: UPDATE_COLOR_LIGHTNESS,
           lightness: action.lightness
         })
+      };
+
+    case SET_BACKGROUND_COLOR_IS_LIGHTNESS_FOCUSED:
+      return {
+        ...state,
+        focusedChannel: {
+          isBackgroundColor: true,
+          colorChannel: 'lightness'
+        }
       };
 
     case SWITCH_COLORS:
@@ -124,6 +158,15 @@ export default function(state = initialState, action) {
         })
       };
 
+    case SET_FOREGROUND_COLOR_IS_HUE_FOCUSED:
+      return {
+        ...state,
+        focusedChannel: {
+          isBackgroundColor: false,
+          colorChannel: 'hue'
+        }
+      };
+
     case UPDATE_FOREGROUND_COLOR_SATURATION:
       return {
         ...state,
@@ -133,6 +176,15 @@ export default function(state = initialState, action) {
         })
       };
 
+    case SET_FOREGROUND_COLOR_IS_SATURATION_FOCUSED:
+      return {
+        ...state,
+        focusedChannel: {
+          isBackgroundColor: false,
+          colorChannel: 'saturation'
+        }
+      };
+
     case UPDATE_FOREGROUND_COLOR_LIGHTNESS:
       return {
         ...state,
@@ -140,6 +192,15 @@ export default function(state = initialState, action) {
           type: UPDATE_COLOR_LIGHTNESS,
           lightness: action.lightness
         })
+      };
+
+    case SET_FOREGROUND_COLOR_IS_LIGHTNESS_FOCUSED:
+      return {
+        ...state,
+        focusedChannel: {
+          isBackgroundColor: false,
+          colorChannel: 'lightness'
+        }
       };
 
     case UPDATE_FONT_SIZE:

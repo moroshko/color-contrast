@@ -11,18 +11,22 @@ export default class Color extends Component {
     isHueValid: PropTypes.bool.isRequired,
     hue: PropTypes.string.isRequired,
     updateHue: PropTypes.func.isRequired,
+    onHueFocus: PropTypes.func.isRequired,
     isSaturationValid: PropTypes.bool.isRequired,
     saturation: PropTypes.string.isRequired,
     updateSaturation: PropTypes.func.isRequired,
+    onSaturationFocus: PropTypes.func.isRequired,
     isLightnessValid: PropTypes.bool.isRequired,
     lightness: PropTypes.string.isRequired,
-    updateLightness: PropTypes.func.isRequired
+    updateLightness: PropTypes.func.isRequired,
+    onLightnessFocus: PropTypes.func.isRequired
   };
 
   render() {
     const { id, isValueValid, value, updateValue, isHueValid, hue, updateHue,
-            isSaturationValid, saturation, updateSaturation, isLightnessValid,
-            lightness, updateLightness } = this.props;
+            onHueFocus, isSaturationValid, saturation, updateSaturation,
+            onSaturationFocus, isLightnessValid, lightness, updateLightness,
+            onLightnessFocus } = this.props;
 
     return (
       <span>
@@ -32,15 +36,18 @@ export default class Color extends Component {
         <label className={styles.hslLabel} htmlFor={id + '-h'}>H:</label>
         <input id={id + '-h'} type="number" min="0" max="360" value={hue}
                className={styles.hslField + (isHueValid ? '' : ' ' + styles.error)}
-               onChange={event => updateHue(event.currentTarget.value)} />
+               onChange={event => updateHue(event.currentTarget.value)}
+               onFocus={onHueFocus} />
         <label className={styles.hslLabel} htmlFor={id + '-s'}>S:</label>
         <input id={id + '-s'} type="number" min="0" max="100" value={saturation}
                className={styles.hslField + (isSaturationValid ? '' : ' ' + styles.error)}
-               onChange={event => updateSaturation(event.currentTarget.value)} />
+               onChange={event => updateSaturation(event.currentTarget.value)}
+               onFocus={onSaturationFocus} />
         <label className={styles.hslLabel} htmlFor={id + '-l'}>L:</label>
         <input id={id + '-l'} type="number" min="0" max="100" value={lightness}
                className={styles.hslField + (isLightnessValid ? '' : ' ' + styles.error)}
-               onChange={event => updateLightness(event.currentTarget.value)} />
+               onChange={event => updateLightness(event.currentTarget.value)}
+               onFocus={onLightnessFocus} />
       </span>
     );
   }

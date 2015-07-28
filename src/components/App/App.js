@@ -35,10 +35,13 @@ export default class App extends Component {
   render() {
     const { state, dispatch } = this.props;
     const { updateAccessibilityLevel, updateBackgroundColorValue,
-            updateBackgroundColorHue, updateBackgroundColorSaturation,
-            updateBackgroundColorLightness, switchColors,
-            updateForegroundColorValue, updateForegroundColorHue,
-            updateForegroundColorSaturation, updateForegroundColorLightness,
+            updateBackgroundColorHue, setBackgroundColorIsHueFocused,
+            updateBackgroundColorSaturation, setBackgroundColorIsSaturationFocused,
+            updateBackgroundColorLightness, setBackgroundColorIsLightnessFocused,
+            switchColors, updateForegroundColorValue,
+            updateForegroundColorHue, setForegroundColorIsHueFocused,
+            updateForegroundColorSaturation, setForegroundColorIsSaturationFocused,
+            updateForegroundColorLightness, setForegroundColorIsLightnessFocused,
             updateFontSize, toggleIsFontBold } = actionCreators;
 
     return (
@@ -52,8 +55,11 @@ export default class App extends Component {
             <BackgroundColor {...state.backgroundColor}
                              updateValue={value => dispatch(updateBackgroundColorValue(value))}
                              updateHue={value => dispatch(updateBackgroundColorHue(value))}
+                             onHueFocus={() => dispatch(setBackgroundColorIsHueFocused())}
                              updateSaturation={value => dispatch(updateBackgroundColorSaturation(value))}
-                             updateLightness={value => dispatch(updateBackgroundColorLightness(value))} />
+                             onSaturationFocus={() => dispatch(setBackgroundColorIsSaturationFocused())}
+                             updateLightness={value => dispatch(updateBackgroundColorLightness(value))}
+                             onLightnessFocus={() => dispatch(setBackgroundColorIsLightnessFocused())} />
           </div>
           <div>
             <SwitchColors {...bindActionCreators({ switchColors }, dispatch)} />
@@ -62,8 +68,11 @@ export default class App extends Component {
             <ForegroundColor {...state.foregroundColor}
                              updateValue={value => dispatch(updateForegroundColorValue(value))}
                              updateHue={value => dispatch(updateForegroundColorHue(value))}
+                             onHueFocus={() => dispatch(setForegroundColorIsHueFocused())}
                              updateSaturation={value => dispatch(updateForegroundColorSaturation(value))}
-                             updateLightness={value => dispatch(updateForegroundColorLightness(value))} />
+                             onSaturationFocus={() => dispatch(setForegroundColorIsSaturationFocused())}
+                             updateLightness={value => dispatch(updateForegroundColorLightness(value))}
+                             onLightnessFocus={() => dispatch(setForegroundColorIsLightnessFocused())} />
           </div>
           <div className={styles.field}>
             <Font {...state.fontSize} isBold={state.isFontBold}
@@ -74,16 +83,19 @@ export default class App extends Component {
           {do {
             if (this.isPreviewVisible()) {
               <div>
+                {do {
+                  if (state.focusedChannel !== null) {
+                    <Graph {...state.focusedChannel}
+                           backgroundColor={state.backgroundColor}
+                           foregroundColor={state.foregroundColor}
+                           accessibleContrast={accessibilityUtils.accessibleContrast(state.accessibilityLevel, state.fontSize.value, state.isFontBold)} />
+                  }
+                }}
                 <Preview accessibilityLevel={state.accessibilityLevel}
                          backgroundColor={state.backgroundColor.value}
                          foregroundColor={state.foregroundColor.value}
                          fontSize={state.fontSize.value}
                          isFontBold={state.isFontBold} />
-                <Graph isBackgroundColor={true}
-                       colorChannel={'lightness'}
-                       backgroundColor={state.backgroundColor}
-                       foregroundColor={state.foregroundColor}
-                       accessibleContrast={accessibilityUtils.accessibleContrast(state.accessibilityLevel, state.fontSize.value, state.isFontBold)} />
               </div>
             } else {
               'Please fix errors'

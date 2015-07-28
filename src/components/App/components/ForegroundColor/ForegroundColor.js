@@ -11,18 +11,22 @@ export default class ForegroundColor extends Component {
     isHueValid: PropTypes.bool.isRequired,
     hue: PropTypes.string.isRequired,
     updateHue: PropTypes.func.isRequired,
+    onHueFocus: PropTypes.func.isRequired,
     isSaturationValid: PropTypes.bool.isRequired,
     saturation: PropTypes.string.isRequired,
     updateSaturation: PropTypes.func.isRequired,
+    onSaturationFocus: PropTypes.func.isRequired,
     isLightnessValid: PropTypes.bool.isRequired,
     lightness: PropTypes.string.isRequired,
-    updateLightness: PropTypes.func.isRequired
+    updateLightness: PropTypes.func.isRequired,
+    onLightnessFocus: PropTypes.func.isRequired
   };
 
   render() {
     const { isValueValid, value, updateValue, isHueValid, hue, updateHue,
-            isSaturationValid, saturation, updateSaturation, isLightnessValid,
-            lightness, updateLightness } = this.props;
+            onHueFocus, isSaturationValid, saturation, updateSaturation,
+            onSaturationFocus, isLightnessValid, lightness, updateLightness,
+            onLightnessFocus } = this.props;
     const id = 'foreground-color';
 
     return (
@@ -33,10 +37,12 @@ export default class ForegroundColor extends Component {
         <Color id={id} isValueValid={isValueValid}
                value={value} updateValue={updateValue}
                isHueValid={isHueValid} hue={hue} updateHue={updateHue}
-               isSaturationValid={isSaturationValid} saturation={saturation}
-               updateSaturation={updateSaturation}
+               onHueFocus={onHueFocus} isSaturationValid={isSaturationValid}
+               saturation={saturation} updateSaturation={updateSaturation}
+               onSaturationFocus={onSaturationFocus}
                isLightnessValid={isLightnessValid} lightness={lightness}
-               updateLightness={updateLightness} />
+               updateLightness={updateLightness}
+               onLightnessFocus={onLightnessFocus} />
       </div>
     );
   }
