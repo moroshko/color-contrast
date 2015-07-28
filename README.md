@@ -4,7 +4,7 @@
 
 * Add tests for reducers
 * Publish to Github pages
-* Add CNAME and submit PR to js.org
+* https://github.com/js-org/dns.js.org
 * Add eslint
 
 
