@@ -2,10 +2,10 @@
 
 ## Todo
 
-* Add accessible contrast value on x axis
-* Add tests for reducers
+* Rename to "Accessible Colors"
 * Publish to Github pages
 * https://github.com/js-org/dns.js.org
+* Add tests for reducers
 * Add eslint
 
 

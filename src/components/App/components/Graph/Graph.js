@@ -55,6 +55,8 @@ export default class Color extends Component {
           <div className={styles.xAxisArrow} />
           <div className={styles.xAxisName}>Contrast</div>
           <div className={styles.xAxisMinValue}>1</div>
+          <div className={styles.xAxisAccessibleContrast}
+               style={{ left: 5 * (accessibleContrast - 1) - 1 + '%' }}>{accessibleContrast}</div>
           <div className={styles.xAxisMaxValue}>21</div>
           <div className={styles.yAxis} />
           <div className={styles.yAxisArrow} />
