@@ -32,6 +32,9 @@ export default class Preview extends Component {
         <div className={styles.currentContrast}>
           Current contrast: {contrast}
         </div>
+        <div className={styles.accessibleContrast}>
+          Accessible contrast: {accessibleContrast}
+        </div>
         <div className={styles.isAccessible}>
           {do {
             if (isAccessible) {
