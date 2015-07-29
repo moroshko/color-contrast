@@ -1,14 +1,8 @@
 import {
   UPDATE_ACCESSIBILITY_LEVEL,
-  UPDATE_BACKGROUND_COLOR_VALUE,
-  UPDATE_BACKGROUND_COLOR_HUE,
-  UPDATE_BACKGROUND_COLOR_SATURATION,
-  UPDATE_BACKGROUND_COLOR_LIGHTNESS,
+  UPDATE_BACKGROUND_COLOR,
   SWITCH_COLORS,
-  UPDATE_FOREGROUND_COLOR_VALUE,
-  UPDATE_FOREGROUND_COLOR_HUE,
-  UPDATE_FOREGROUND_COLOR_SATURATION,
-  UPDATE_FOREGROUND_COLOR_LIGHTNESS,
+  UPDATE_FOREGROUND_COLOR,
   UPDATE_FONT_SIZE,
   TOGGLE_IS_FONT_BOLD,
   UPDATE_FOCUSED_CHANNEL
@@ -21,31 +15,11 @@ export function updateAccessibilityLevel(value) {
   };
 }
 
-export function updateBackgroundColorValue(value) {
+export function updateBackgroundColor(field, value) {
   return {
-    type: UPDATE_BACKGROUND_COLOR_VALUE,
+    type: UPDATE_BACKGROUND_COLOR,
+    field,
     value
-  };
-}
-
-export function updateBackgroundColorHue(hue) {
-  return {
-    type: UPDATE_BACKGROUND_COLOR_HUE,
-    hue
-  };
-}
-
-export function updateBackgroundColorSaturation(saturation) {
-  return {
-    type: UPDATE_BACKGROUND_COLOR_SATURATION,
-    saturation
-  };
-}
-
-export function updateBackgroundColorLightness(lightness) {
-  return {
-    type: UPDATE_BACKGROUND_COLOR_LIGHTNESS,
-    lightness
   };
 }
 
@@ -55,31 +29,11 @@ export function switchColors(value) {
   };
 }
 
-export function updateForegroundColorValue(value) {
+export function updateForegroundColor(field, value) {
   return {
-    type: UPDATE_FOREGROUND_COLOR_VALUE,
+    type: UPDATE_FOREGROUND_COLOR,
+    field,
     value
-  };
-}
-
-export function updateForegroundColorHue(hue) {
-  return {
-    type: UPDATE_FOREGROUND_COLOR_HUE,
-    hue
-  };
-}
-
-export function updateForegroundColorSaturation(saturation) {
-  return {
-    type: UPDATE_FOREGROUND_COLOR_SATURATION,
-    saturation
-  };
-}
-
-export function updateForegroundColorLightness(lightness) {
-  return {
-    type: UPDATE_FOREGROUND_COLOR_LIGHTNESS,
-    lightness
   };
 }
 

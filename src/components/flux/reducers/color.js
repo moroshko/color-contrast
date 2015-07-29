@@ -1,10 +1,5 @@
 import colorUtils from 'utils/color';
-import {
-  UPDATE_COLOR_VALUE,
-  UPDATE_COLOR_HUE,
-  UPDATE_COLOR_SATURATION,
-  UPDATE_COLOR_LIGHTNESS
-} from 'flux/constants/actionTypes/color';
+import { UPDATE_COLOR } from 'flux/constants/actionTypes/color';
 
 export default function(state, action) {
   let { value, isValueValid,
@@ -58,27 +53,31 @@ export default function(state, action) {
     };
   }
 
-  switch (action.type) {
-    case UPDATE_COLOR_VALUE:
+  if (action.type !== UPDATE_COLOR) {
+    return state;
+  }
+
+  switch (action.field) {
+    case 'value':
       value = action.value;
       isValueValid = colorUtils.isValueValid(value);
 
       return updateHSLifValueValid();
 
-    case UPDATE_COLOR_HUE:
-      hue = action.hue;
+    case 'hue':
+      hue = action.value;
       isHueValid = colorUtils.isHueValid(hue);
 
       return updateValueIfHSLvalid();
 
-    case UPDATE_COLOR_SATURATION:
-      saturation = action.saturation;
+    case 'saturation':
+      saturation = action.value;
       isSaturationValid = colorUtils.isSaturationValid(saturation);
 
       return updateValueIfHSLvalid();
 
-    case UPDATE_COLOR_LIGHTNESS:
-      lightness = action.lightness;
+    case 'lightness':
+      lightness = action.value;
       isLightnessValid = colorUtils.isLightnessValid(lightness);
 
       return updateValueIfHSLvalid();

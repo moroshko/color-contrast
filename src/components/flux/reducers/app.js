@@ -2,25 +2,14 @@ import colorUtils from 'utils/color';
 import numberUtils from 'utils/number';
 import {
   UPDATE_ACCESSIBILITY_LEVEL,
-  UPDATE_BACKGROUND_COLOR_VALUE,
-  UPDATE_BACKGROUND_COLOR_HUE,
-  UPDATE_BACKGROUND_COLOR_SATURATION,
-  UPDATE_BACKGROUND_COLOR_LIGHTNESS,
+  UPDATE_BACKGROUND_COLOR,
   SWITCH_COLORS,
-  UPDATE_FOREGROUND_COLOR_VALUE,
-  UPDATE_FOREGROUND_COLOR_HUE,
-  UPDATE_FOREGROUND_COLOR_SATURATION,
-  UPDATE_FOREGROUND_COLOR_LIGHTNESS,
+  UPDATE_FOREGROUND_COLOR,
   UPDATE_FONT_SIZE,
   TOGGLE_IS_FONT_BOLD,
   UPDATE_FOCUSED_CHANNEL
 } from 'flux/constants/actionTypes/app';
-import {
-  UPDATE_COLOR_VALUE,
-  UPDATE_COLOR_HUE,
-  UPDATE_COLOR_SATURATION,
-  UPDATE_COLOR_LIGHTNESS
-} from 'flux/constants/actionTypes/color';
+import { UPDATE_COLOR } from 'flux/constants/actionTypes/color';
 import colorReducer from 'flux/reducers/color';
 
 const initialBackgroundColor = '#696DF9';
@@ -65,39 +54,13 @@ export default function(state = initialState, action) {
         accessibilityLevel: action.value
       };
 
-    case UPDATE_BACKGROUND_COLOR_VALUE:
+    case UPDATE_BACKGROUND_COLOR:
       return {
         ...state,
         backgroundColor: colorReducer(state.backgroundColor, {
-          type: UPDATE_COLOR_VALUE,
+          type: UPDATE_COLOR,
+          field: action.field,
           value: action.value
-        })
-      };
-
-    case UPDATE_BACKGROUND_COLOR_HUE:
-      return {
-        ...state,
-        backgroundColor: colorReducer(state.backgroundColor, {
-          type: UPDATE_COLOR_HUE,
-          hue: action.hue
-        })
-      };
-
-    case UPDATE_BACKGROUND_COLOR_SATURATION:
-      return {
-        ...state,
-        backgroundColor: colorReducer(state.backgroundColor, {
-          type: UPDATE_COLOR_SATURATION,
-          saturation: action.saturation
-        })
-      };
-
-    case UPDATE_BACKGROUND_COLOR_LIGHTNESS:
-      return {
-        ...state,
-        backgroundColor: colorReducer(state.backgroundColor, {
-          type: UPDATE_COLOR_LIGHTNESS,
-          lightness: action.lightness
         })
       };
 
@@ -108,39 +71,13 @@ export default function(state = initialState, action) {
         foregroundColor: {...state.backgroundColor}
       };
 
-    case UPDATE_FOREGROUND_COLOR_VALUE:
+    case UPDATE_FOREGROUND_COLOR:
       return {
         ...state,
         foregroundColor: colorReducer(state.foregroundColor, {
-          type: UPDATE_COLOR_VALUE,
+          type: UPDATE_COLOR,
+          field: action.field,
           value: action.value
-        })
-      };
-
-    case UPDATE_FOREGROUND_COLOR_HUE:
-      return {
-        ...state,
-        foregroundColor: colorReducer(state.foregroundColor, {
-          type: UPDATE_COLOR_HUE,
-          hue: action.hue
-        })
-      };
-
-    case UPDATE_FOREGROUND_COLOR_SATURATION:
-      return {
-        ...state,
-        foregroundColor: colorReducer(state.foregroundColor, {
-          type: UPDATE_COLOR_SATURATION,
-          saturation: action.saturation
-        })
-      };
-
-    case UPDATE_FOREGROUND_COLOR_LIGHTNESS:
-      return {
-        ...state,
-        foregroundColor: colorReducer(state.foregroundColor, {
-          type: UPDATE_COLOR_LIGHTNESS,
-          lightness: action.lightness
         })
       };
 
