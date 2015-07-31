@@ -1,4 +1,4 @@
-import colorUtils from 'utils/color';
+import colorUtils from 'utils/color/color';
 import { UPDATE_COLOR } from 'flux/constants/actionTypes/color';
 
 export default function(state, action) {

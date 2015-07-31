@@ -1,8 +1,8 @@
 import styles from './Preview.less';
 
 import React, { Component, PropTypes } from 'react';
-import colorUtils from 'utils/color';
-import accessibilityUtils from 'utils/accessibility';
+import colorUtils from 'utils/color/color';
+import accessibilityUtils from 'utils/accessibility/accessibility';
 
 export default class Preview extends Component {
   static propTypes = {

@@ -1,7 +1,7 @@
 import styles from './Graph.less';
 
 import React, { Component, PropTypes } from 'react';
-import colorUtils from 'utils/color';
+import colorUtils from 'utils/color/color';
 
 export default class Color extends Component {
   static propTypes = {

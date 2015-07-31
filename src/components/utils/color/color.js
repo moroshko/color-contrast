@@ -231,72 +231,146 @@ function contrast(str1, str2) {
 
 function findClosestAccessibleDarkerColor(adjustableColor, otherColor, contrastRatio) {
   let { h, s, l } = str2hsl(adjustableColor);
+  let min = 0, minColor = hsl2str({ h, s, l: 0 });
 
   if (contrast(adjustableColor, otherColor) < contrastRatio) {
-    let min = 0;
-
-    if (contrast(hsl2str({ h, s, l: min }), otherColor) < contrastRatio) {
+    if (contrast(minColor, otherColor) < contrastRatio) {
       return null;
     }
 
-    let max = l, lastAccessibleColor = null;
+    let max = l, maxColor = hsl2str({ h, s, l });
+    let lastMinColor, lastMaxColor;
 
-    while (true) {
+    while (minColor !== lastMinColor || maxColor !== lastMaxColor) {
+      lastMinColor = minColor;
+      lastMaxColor = maxColor;
+
       l = (min + max) / 2;
       adjustableColor = hsl2str({ h, s, l });
 
       if (contrast(adjustableColor, otherColor) >= contrastRatio) {
-        if (adjustableColor === lastAccessibleColor) {
-          break;
-        }
-
         min = l;
-        lastAccessibleColor = adjustableColor;
+        minColor = hsl2str({ h, s, l });
       } else {
         max = l;
+        maxColor = hsl2str({ h, s, l });
       }
     }
   }
 
   return {
-    color: adjustableColor,
-    lightness: l
+    color: minColor,
+    lightness: min
+  };
+}
+
+function findClosestAccessibleDarkerColor(adjustableColor, otherColor, contrastRatio) {
+  let { h, s, l } = str2hsl(adjustableColor);
+
+  if (contrast(adjustableColor, otherColor) >= contrastRatio) {
+    return {
+      color: adjustableColor,
+      lightness: l
+    };
+  }
+
+  let minColor = hsl2str({ h, s, l: 0 });
+
+  if (contrast(minColor, otherColor) < contrastRatio) {
+    return null;
+  }
+
+  let min = 0, max = l, maxColor = hsl2str({ h, s, l });
+  let lastMinColor, lastMaxColor;
+
+  while (minColor !== lastMinColor || maxColor !== lastMaxColor) {
+    lastMinColor = minColor;
+    lastMaxColor = maxColor;
+
+    l = (min + max) / 2;
+    adjustableColor = hsl2str({ h, s, l });
+
+    if (contrast(adjustableColor, otherColor) < contrastRatio) {
+      max = l;
+      maxColor = hsl2str({ h, s, l });
+    } else {
+      min = l;
+      minColor = hsl2str({ h, s, l });
+    }
+  }
+
+  return {
+    color: minColor,
+    lightness: min
   };
 }
 
 function findClosestAccessibleLighterColor(adjustableColor, otherColor, contrastRatio) {
   let { h, s, l } = str2hsl(adjustableColor);
 
-  if (contrast(adjustableColor, otherColor) < contrastRatio) {
-    let max = 100;
+  if (contrast(adjustableColor, otherColor) >= contrastRatio) {
+    return {
+      color: adjustableColor,
+      lightness: l
+    };
+  }
 
-    if (contrast(hsl2str({ h, s, l: max }), otherColor) < contrastRatio) {
-      return null;
-    }
+  let maxColor = hsl2str({ h, s, l: 100 });
 
-    let min = l, lastAccessibleColor = null;
+  if (contrast(maxColor, otherColor) < contrastRatio) {
+    return null;
+  }
 
-    while (true) {
-      l = (min + max) / 2;
-      adjustableColor = hsl2str({ h, s, l });
+  let min = l, max = 100, minColor = hsl2str({ h, s, l });
+  let lastMinColor, lastMaxColor;
 
-      if (contrast(adjustableColor, otherColor) >= contrastRatio) {
-        if (adjustableColor === lastAccessibleColor) {
-          break;
-        }
+  while (minColor !== lastMinColor || maxColor !== lastMaxColor) {
+    lastMinColor = minColor;
+    lastMaxColor = maxColor;
 
-        max = l;
-        lastAccessibleColor = adjustableColor;
-      } else {
-        min = l;
-      }
+    l = (min + max) / 2;
+    adjustableColor = hsl2str({ h, s, l });
+
+    if (contrast(adjustableColor, otherColor) < contrastRatio) {
+      min = l;
+      minColor = hsl2str({ h, s, l });
+    } else {
+      max = l;
+      maxColor = hsl2str({ h, s, l });
     }
   }
 
   return {
-    color: adjustableColor,
-    lightness: l
+    color: maxColor,
+    lightness: max
   };
+}
+
+function findClosestAccessibleColor(adjustableColor, otherColor, contrastRatio) {
+  const closestDarkerColor =
+    findClosestAccessibleDarkerColor(adjustableColor, otherColor, contrastRatio);
+  const closestLighterColor =
+    findClosestAccessibleLighterColor(adjustableColor, otherColor, contrastRatio);
+
+  if (closestDarkerColor === null) {
+    if (closestLighterColor === null) {
+      return null;
+    }
+
+    return closestLighterColor.color;
+  }
+
+  if (closestLighterColor === null) {
+    return closestDarkerColor.color;
+  }
+
+  const { h, s, l } = str2hsl(adjustableColor);
+
+  if (closestLighterColor.lightness - l < l - closestDarkerColor.lightness) {
+    return closestLighterColor.color;
+  }
+
+  return closestDarkerColor.color;
 }
 
 export default {
@@ -306,5 +380,6 @@ export default {
   isLightnessValid,
   contrast,
   str2hsl,
-  hsl2str
+  hsl2str,
+  findClosestAccessibleColor
 };

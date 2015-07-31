@@ -1,5 +1,5 @@
-import colorUtils from 'utils/color';
-import numberUtils from 'utils/number';
+import colorUtils from 'utils/color/color';
+import numberUtils from 'utils/number/number';
 import {
   UPDATE_ACCESSIBILITY_LEVEL,
   UPDATE_BACKGROUND_COLOR,

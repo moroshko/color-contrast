@@ -2,7 +2,7 @@
 
 * Publish to Github pages
 * https://github.com/js-org/dns.js.org
-* Add tests for reducers and color utils
+* Add tests for reducers
 * Add eslint
 
 

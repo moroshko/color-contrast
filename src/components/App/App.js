@@ -2,7 +2,7 @@ import styles from './App.less';
 
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
-import accessibilityUtils from 'utils/accessibility';
+import accessibilityUtils from 'utils/accessibility/accessibility';
 import * as actionCreators from 'flux/actionCreators/app';
 import AccessibilityLevel from 'AccessibilityLevel/AccessibilityLevel';
 import BackgroundColor from 'BackgroundColor/BackgroundColor';
