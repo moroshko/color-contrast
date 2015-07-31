@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { accessibleContrast } from './accessibility';
 
-describe.only('Accessibility Utils', () => {
+describe('Accessibility Utils', () => {
   describe('accessibleContrast()', () => {
     describe('AA', () => {
       it('should be 4.5 for normal scale', () => {
