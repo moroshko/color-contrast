@@ -373,6 +373,14 @@ function findClosestAccessibleColor(adjustableColor, otherColor, contrastRatio) 
   return closestDarkerColor.color;
 }
 
+function randomColor() {
+  return rgb2sixDigitHex({
+    r: Math.floor(Math.random() * 256),
+    g: Math.floor(Math.random() * 256),
+    b: Math.floor(Math.random() * 256)
+  });
+}
+
 export default {
   isValueValid,
   isHueValid,
@@ -381,5 +389,6 @@ export default {
   contrast,
   str2hsl,
   hsl2str,
-  findClosestAccessibleColor
+  findClosestAccessibleColor,
+  randomColor
 };

@@ -9,6 +9,7 @@ import BackgroundColor from 'BackgroundColor/BackgroundColor';
 import SwitchColors from 'SwitchColors/SwitchColors';
 import ForegroundColor from 'ForegroundColor/ForegroundColor';
 import Font from 'Font/Font';
+import Animation from 'Animation/Animation';
 import Preview from 'Preview/Preview';
 import Graph from 'Graph/Graph';
 
@@ -71,6 +72,11 @@ export default class App extends Component {
           <div className={styles.field}>
             <Font {...state.fontSize} isBold={state.isFontBold}
                   {...bindActionCreators({ updateFontSize, toggleIsFontBold }, dispatch)} />
+          </div>
+          <div className={styles.animation}>
+            <Animation text="I am AAA accessible" pagesCount={3} pageWidth={450}
+                       pageHeight={150} textWidth={340} textFontSize={36}
+                       textLineHeight={54} />
           </div>
         </div>
         <div className={styles.preview}>
