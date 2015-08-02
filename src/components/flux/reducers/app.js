@@ -7,7 +7,8 @@ import {
   UPDATE_FOREGROUND_COLOR,
   UPDATE_FONT_SIZE,
   TOGGLE_IS_FONT_BOLD,
-  UPDATE_FOCUSED_CHANNEL
+  UPDATE_FOCUSED_CHANNEL,
+  UPDATE_HEADER_COLORS
 } from 'flux/constants/actionTypes/app';
 import { UPDATE_COLOR } from 'flux/constants/actionTypes/color';
 import colorReducer from 'flux/reducers/color';
@@ -43,7 +44,11 @@ const initialState = {
     value: '14'
   },
   isFontBold: false,
-  focusedChannel: null
+  focusedChannel: null,
+  header: {
+    backgroundColor: '#5358f8',
+    color: '#f6f7ad'
+  }
 };
 
 export default function(state = initialState, action) {
@@ -102,6 +107,15 @@ export default function(state = initialState, action) {
         focusedChannel: {
           isBackgroundColor: action.isBackgroundColor,
           colorChannel: action.colorChannel
+        }
+      };
+
+    case UPDATE_HEADER_COLORS:
+      return {
+        ...state,
+        header: {
+          backgroundColor: action.backgroundColor,
+          color: action.color
         }
       };
 

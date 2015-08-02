@@ -5,7 +5,8 @@ import {
   UPDATE_FOREGROUND_COLOR,
   UPDATE_FONT_SIZE,
   TOGGLE_IS_FONT_BOLD,
-  UPDATE_FOCUSED_CHANNEL
+  UPDATE_FOCUSED_CHANNEL,
+  UPDATE_HEADER_COLORS
 } from 'flux/constants/actionTypes/app';
 
 export function updateAccessibilityLevel(value) {
@@ -55,5 +56,13 @@ export function updateFocusedChannel(isBackgroundColor, colorChannel) {
     type: UPDATE_FOCUSED_CHANNEL,
     isBackgroundColor,
     colorChannel
+  };
+}
+
+export function updateHeaderColors(backgroundColor, color) {
+  return {
+    type: UPDATE_HEADER_COLORS,
+    backgroundColor,
+    color
   };
 }
