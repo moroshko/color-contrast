@@ -10,7 +10,6 @@ export default class Animation extends Component {
     pagesCount: PropTypes.number.isRequired,
     pageWidth: PropTypes.number.isRequired,
     pageHeight: PropTypes.number.isRequired,
-    textWidth: PropTypes.number.isRequired,
     textFontSize: PropTypes.number.isRequired,
     textLineHeight: PropTypes.number.isRequired
   };
@@ -18,12 +17,9 @@ export default class Animation extends Component {
   constructor(props) {
     super(props);
 
-    this.spaceBelowText = 14; // Magic number
-
     const { pagesCount, pageHeight, textLineHeight } = props;
 
     this.accessibleContrast = 4.5;
-    this.enterOffset = (pageHeight - textLineHeight) / 2 + this.spaceBelowText;
 
     let pages = [];
 
@@ -33,7 +29,7 @@ export default class Animation extends Component {
       });
     }
 
-    this.topTextPageIndex = Math.floor(pagesCount / 2);
+    this.topTextPageIndex = Math.floor((pagesCount - 1) / 2);
 
     const color = '#ff0000';
     const topColor = findClosestAccessibleColor(color, pages[this.topTextPageIndex].backgroundColor, this.accessibleContrast);
@@ -44,15 +40,15 @@ export default class Animation extends Component {
       topColor,
       bottomColor,
       offset: 0,
-      topTextHeight: textLineHeight
+      topTextHeight: pagesCount % 2 === 0 ? textLineHeight / 2 : (pageHeight + textLineHeight) / 2
     };
 
-    this.intervalId = setInterval(::this.move, 10);
+    this.intervalId = setInterval(::this.move, 50);
   }
 
   getNextState() {
-    let { pages, topColor, bottomColor, offset } = this.state;
-    const { pageHeight, textLineHeight } = this.props;
+    let { pages, topColor, bottomColor, offset, topTextHeight } = this.state;
+    const { pagesCount, pageHeight, textLineHeight } = this.props;
 
     if (offset === pageHeight) {
       pages.shift();
@@ -60,19 +56,17 @@ export default class Animation extends Component {
         backgroundColor: randomColor()
       });
       offset = 0;
-      topColor = bottomColor;
-      bottomColor = findClosestAccessibleColor(topColor, pages[this.topTextPageIndex + 1].backgroundColor, this.accessibleContrast);
     } else {
       offset += 1;
     }
 
-    const topTextHeight = Math.min(
-      textLineHeight,
-      Math.max(
-        0,
-        this.enterOffset + textLineHeight - offset - this.spaceBelowText
-      )
-    );
+    if (topTextHeight === 0) {
+      topTextHeight = pageHeight;
+      topColor = bottomColor;
+      bottomColor = findClosestAccessibleColor(topColor, pages[this.topTextPageIndex + 2].backgroundColor, this.accessibleContrast);
+    } else {
+      topTextHeight -= 1;
+    }
 
     return {
       pages,
@@ -88,18 +82,19 @@ export default class Animation extends Component {
   }
 
   render() {
-    const { text, pagesCount, pageWidth, pageHeight,
-            textWidth, textFontSize, textLineHeight } = this.props;
+    const { text, pagesCount, pageWidth, pageHeight, textFontSize, textLineHeight } = this.props;
     const { pages, offset, topTextHeight, topColor, bottomColor } = this.state;
     const containerStyle = {
+      width: pageWidth,
       height: pagesCount * pageHeight,
-      borderRadius: pageWidth / 2
+      borderRadius: pageWidth / 4
     };
     const backgroundContainerStyle = {
       transform: `translateY(-${offset}px)`
     };
     const textContainerStyle = {
-      left: (pageWidth - textWidth) / 2,
+      width: pageWidth,
+      left: 0,
       top: (containerStyle.height - textLineHeight) / 2
     };
 

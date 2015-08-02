@@ -74,9 +74,8 @@ export default class App extends Component {
                   {...bindActionCreators({ updateFontSize, toggleIsFontBold }, dispatch)} />
           </div>
           <div className={styles.animation}>
-            <Animation text="I am AAA accessible" pagesCount={3} pageWidth={450}
-                       pageHeight={150} textWidth={340} textFontSize={36}
-                       textLineHeight={54} />
+            <Animation text="I am AAA accessible" pagesCount={3} pageWidth={300}
+                       pageHeight={100} textFontSize={26} textLineHeight={39} />
           </div>
         </div>
         <div className={styles.preview}>
