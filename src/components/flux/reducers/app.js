@@ -46,8 +46,8 @@ const initialState = {
   isFontBold: false,
   focusedChannel: null,
   header: {
-    backgroundColor: '#5358f8',
-    color: '#f6f7ad'
+    backgroundColor: '#141414',
+    color: '#ff0000'
   }
 };
 

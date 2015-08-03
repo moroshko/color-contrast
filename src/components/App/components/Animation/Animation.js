@@ -40,7 +40,7 @@ export default class Animation extends Component {
       topColor,
       bottomColor,
       offset: 0,
-      topTextHeight: pagesCount % 2 === 0 ? textLineHeight / 2 : (pageHeight + textLineHeight) / 2
+      topTextHeight: Math.floor(pagesCount % 2 === 0 ? textLineHeight / 2 : (pageHeight + textLineHeight) / 2)
     };
 
     this.intervalId = setInterval(::this.move, 50);

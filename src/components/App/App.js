@@ -91,10 +91,8 @@ export default class App extends Component {
           </div>
           <div className={styles.animation}>
             <Header {...state.header} />
-            {/*
             <Animation text="I am AAA accessible" pagesCount={3} pageWidth={300}
                        pageHeight={100} textFontSize={26} textLineHeight={39} />
-            */}
           </div>
         </div>
         <div className={styles.preview}>
