@@ -1,7 +1,6 @@
 import {
   UPDATE_ACCESSIBILITY_LEVEL,
   UPDATE_BACKGROUND_COLOR,
-  SWITCH_COLORS,
   UPDATE_FOREGROUND_COLOR,
   UPDATE_FONT_SIZE,
   TOGGLE_IS_FONT_BOLD,
@@ -20,12 +19,6 @@ export function updateBackgroundColor(field, value) {
     type: UPDATE_BACKGROUND_COLOR,
     field,
     value
-  };
-}
-
-export function switchColors(value) {
-  return {
-    type: SWITCH_COLORS
   };
 }
 

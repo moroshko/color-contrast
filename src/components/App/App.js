@@ -7,7 +7,6 @@ import accessibilityUtils from 'utils/accessibility/accessibility';
 import * as actionCreators from 'flux/actionCreators/app';
 import AccessibilityLevel from 'AccessibilityLevel/AccessibilityLevel';
 import BackgroundColor from 'BackgroundColor/BackgroundColor';
-import SwitchColors from 'SwitchColors/SwitchColors';
 import ForegroundColor from 'ForegroundColor/ForegroundColor';
 import Font from 'Font/Font';
 import Preview from 'Preview/Preview';
@@ -19,23 +18,9 @@ export default class App extends Component {
     dispatch: PropTypes.func.isRequired
   };
 
-  isPreviewVisible() {
-    const { state } = this.props;
-
-    return state.backgroundColor.isValueValid &&
-           state.backgroundColor.isHueValid &&
-           state.backgroundColor.isSaturationValid &&
-           state.backgroundColor.isLightnessValid &&
-           state.foregroundColor.isValueValid &&
-           state.foregroundColor.isHueValid &&
-           state.foregroundColor.isSaturationValid &&
-           state.foregroundColor.isLightnessValid &&
-           state.fontSize.isValid;
-  }
-
   render() {
     const { state, dispatch } = this.props;
-    const { updateAccessibilityLevel, updateBackgroundColor, switchColors,
+    const { updateAccessibilityLevel, updateBackgroundColor,
             updateForegroundColor, updateFontSize, toggleIsFontBold,
             updateFocusedChannel } = actionCreators;
 
@@ -56,9 +41,6 @@ export default class App extends Component {
                              updateLightness={value => dispatch(updateBackgroundColor('lightness', value))}
                              onLightnessFocus={() => dispatch(updateFocusedChannel(true, 'lightness'))} />
           </div>
-          <div>
-            <SwitchColors {...bindActionCreators({ switchColors }, dispatch)} />
-          </div>
           <div className={styles.field}>
             <ForegroundColor {...state.foregroundColor}
                              updateValue={value => dispatch(updateForegroundColor('value', value))}
@@ -75,27 +57,21 @@ export default class App extends Component {
           </div>
         </div>
         <div className={styles.preview}>
-          {do {
-            if (this.isPreviewVisible()) {
-              <div>
-                {do {
-                  if (state.focusedChannel !== null) {
-                    <Graph {...state.focusedChannel}
-                           backgroundColor={state.backgroundColor}
-                           foregroundColor={state.foregroundColor}
-                           accessibleContrast={accessibilityUtils.accessibleContrast(state.accessibilityLevel, state.fontSize.value, state.isFontBold)} />
-                  }
-                }}
-                <Preview accessibilityLevel={state.accessibilityLevel}
-                         backgroundColor={state.backgroundColor.value}
-                         foregroundColor={state.foregroundColor.value}
-                         fontSize={state.fontSize.value}
-                         isFontBold={state.isFontBold} />
-              </div>
-            } else {
-              'Please fix errors'
-            }
-          }}
+          {/*
+          <Graph {...state.focusedChannel}
+                 backgroundColor={state.backgroundColor}
+                 foregroundColor={state.foregroundColor}
+                 accessibleContrast={accessibilityUtils.accessibleContrast(state.accessibilityLevel, state.fontSize.value, state.isFontBold)} />
+          */}
+          <Preview accessibilityLevel={state.accessibilityLevel}
+                   backgroundColor={state.backgroundColor}
+                   foregroundColor={state.foregroundColor}
+                   fontSize={state.fontSize.value}
+                   isFontBold={state.isFontBold}
+                   updateBackgroundColorValue={value => dispatch(updateBackgroundColor('value', value))}
+                   updateBackgroundColorEditMode={value => dispatch(updateBackgroundColor('editMode', value))}
+                   updateForegroundColorValue={value => dispatch(updateForegroundColor('value', value))}
+                   updateForegroundColorEditMode={value => dispatch(updateForegroundColor('editMode', value))} />
         </div>
       </div>
     );

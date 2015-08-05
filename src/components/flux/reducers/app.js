@@ -3,7 +3,6 @@ import numberUtils from 'utils/number/number';
 import {
   UPDATE_ACCESSIBILITY_LEVEL,
   UPDATE_BACKGROUND_COLOR,
-  SWITCH_COLORS,
   UPDATE_FOREGROUND_COLOR,
   UPDATE_FONT_SIZE,
   TOGGLE_IS_FONT_BOLD,
@@ -26,7 +25,8 @@ const initialState = {
     isSaturationValid: true,
     saturation: initialBackgroundColorHSL.s.toString(),
     isLightnessValid: true,
-    lightness: initialBackgroundColorHSL.l.toString()
+    lightness: initialBackgroundColorHSL.l.toString(),
+    editMode: true
   },
   foregroundColor: {
     isValueValid: true,
@@ -36,11 +36,12 @@ const initialState = {
     isSaturationValid: true,
     saturation: initialForegroundColorHSL.s.toString(),
     isLightnessValid: true,
-    lightness: initialForegroundColorHSL.l.toString()
+    lightness: initialForegroundColorHSL.l.toString(),
+    editMode: false
   },
   fontSize: {
     isValid: true,
-    value: '14'
+    value: '26'
   },
   isFontBold: false,
   focusedChannel: null
@@ -62,13 +63,6 @@ export default function(state = initialState, action) {
           field: action.field,
           value: action.value
         })
-      };
-
-    case SWITCH_COLORS:
-      return {
-        ...state,
-        backgroundColor: {...state.foregroundColor},
-        foregroundColor: {...state.backgroundColor}
       };
 
     case UPDATE_FOREGROUND_COLOR:

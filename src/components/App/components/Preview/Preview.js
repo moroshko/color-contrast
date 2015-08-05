@@ -3,38 +3,48 @@ import styles from './Preview.less';
 import React, { Component, PropTypes } from 'react';
 import colorUtils from 'utils/color/color';
 import accessibilityUtils from 'utils/accessibility/accessibility';
+import Editable from 'Editable/Editable';
 
 export default class Preview extends Component {
   static propTypes = {
     accessibilityLevel: PropTypes.string.isRequired,
-    backgroundColor: PropTypes.string.isRequired,
-    foregroundColor: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.object.isRequired,
+    foregroundColor: PropTypes.object.isRequired,
     fontSize: PropTypes.string.isRequired,
-    isFontBold: PropTypes.bool.isRequired
+    isFontBold: PropTypes.bool.isRequired,
+    updateBackgroundColorValue: PropTypes.func.isRequired,
+    updateBackgroundColorEditMode: PropTypes.func.isRequired,
+    updateForegroundColorValue: PropTypes.func.isRequired,
+    updateForegroundColorEditMode: PropTypes.func.isRequired
   };
 
   render() {
     const { accessibilityLevel, backgroundColor, foregroundColor,
-            fontSize, isFontBold } = this.props;
-    const contrast = colorUtils.contrast(backgroundColor, foregroundColor);
+            fontSize, isFontBold,
+            updateBackgroundColorValue, updateBackgroundColorEditMode,
+            updateForegroundColorValue, updateForegroundColorEditMode } = this.props;
+    //const contrast = colorUtils.contrast(backgroundColor.value, foregroundColor.value);
     const accessibleContrast =
       accessibilityUtils.accessibleContrast(accessibilityLevel, fontSize, isFontBold);
-    const isAccessible = (contrast >= accessibleContrast);
+    //const isAccessible = (contrast >= accessibleContrast);
     const style = {
-      color: foregroundColor,
-      backgroundColor,
+      color: foregroundColor.value,
+      backgroundColor: backgroundColor.value,
       fontSize: fontSize + 'px',
       fontWeight: isFontBold ? 'bold' : 'normal'
     };
 
     return (
       <div className={styles.container}>
+        {/*
         <div className={styles.currentContrast}>
           Current contrast: {contrast}
         </div>
+        */}
         <div className={styles.accessibleContrast}>
           Accessible contrast: {accessibleContrast}
         </div>
+        {/*
         <div className={styles.isAccessible}>
           {do {
             if (isAccessible) {
@@ -44,9 +54,23 @@ export default class Preview extends Component {
             }
           }}
         </div>
+        */}
         <div className={styles.text} style={style}>
-          To specify how the state tree is transformed by the actions,
-          you write pure reducers.
+          <div>
+            Background Color <Editable editMode={backgroundColor.editMode}
+                                       value={backgroundColor.value}
+                                       onChange={updateBackgroundColorValue}
+                                       onEditStart={() => updateBackgroundColorEditMode(true)}
+                                       onEditEnd={() => updateBackgroundColorEditMode(false)} />
+          </div>
+          <div>
+            Color <Editable editMode={foregroundColor.editMode}
+                            value={foregroundColor.value}
+                            onChange={updateForegroundColorValue}
+                            onEditStart={() => updateForegroundColorEditMode(true)}
+                            onEditEnd={() => updateForegroundColorEditMode(false)} />
+          </div>
+
         </div>
       </div>
     );
