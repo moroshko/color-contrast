@@ -10,8 +10,6 @@ import BackgroundColor from 'BackgroundColor/BackgroundColor';
 import SwitchColors from 'SwitchColors/SwitchColors';
 import ForegroundColor from 'ForegroundColor/ForegroundColor';
 import Font from 'Font/Font';
-import Header from 'Header/Header';
-import Animation from 'Animation/Animation';
 import Preview from 'Preview/Preview';
 import Graph from 'Graph/Graph';
 
@@ -20,20 +18,6 @@ export default class App extends Component {
     state: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired
   };
-
-  constructor(props) {
-    super(props);
-
-    const { state, dispatch } = props;
-    const { header } = state;
-
-    setInterval(() => {
-      const backgroundColor = randomColor();
-      const color = findClosestAccessibleColor(header.color, backgroundColor, 4.5);
-
-      dispatch(actionCreators.updateHeaderColors(backgroundColor, color));
-    }, 5000);
-  }
 
   isPreviewVisible() {
     const { state } = this.props;
@@ -88,11 +72,6 @@ export default class App extends Component {
           <div className={styles.field}>
             <Font {...state.fontSize} isBold={state.isFontBold}
                   {...bindActionCreators({ updateFontSize, toggleIsFontBold }, dispatch)} />
-          </div>
-          <div className={styles.animation}>
-            <Header {...state.header} />
-            <Animation text="I am AAA accessible" pagesCount={3} pageWidth={300}
-                       pageHeight={100} textFontSize={26} textLineHeight={39} />
           </div>
         </div>
         <div className={styles.preview}>
