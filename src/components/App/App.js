@@ -5,11 +5,12 @@ import { bindActionCreators } from 'redux';
 import { randomColor, findClosestAccessibleColor } from 'utils/color/color';
 import accessibilityUtils from 'utils/accessibility/accessibility';
 import * as actionCreators from 'flux/actionCreators/app';
+import UserInput from 'UserInput/UserInput';
 import AccessibilityLevel from 'AccessibilityLevel/AccessibilityLevel';
 import BackgroundColor from 'BackgroundColor/BackgroundColor';
 import ForegroundColor from 'ForegroundColor/ForegroundColor';
 import Font from 'Font/Font';
-import Preview from 'Preview/Preview';
+//import Preview from 'Preview/Preview';
 import Graph from 'Graph/Graph';
 
 export default class App extends Component {
@@ -20,12 +21,24 @@ export default class App extends Component {
 
   render() {
     const { state, dispatch } = this.props;
-    const { updateAccessibilityLevel, updateBackgroundColor,
-            updateForegroundColor, updateFontSize, toggleIsFontBold,
-            updateFocusedChannel } = actionCreators;
+    const { foregroundColor, backgroundColor, fontSize,
+            isFontBold, accessibilityLevel } = state;
+    const { updateForegroundColor, updateBackgroundColor, updateFontSize,
+            toggleIsFontBold, updateAccessibilityLevel } = actionCreators;
 
     return (
       <div className={styles.container}>
+        <UserInput foregroundColor={foregroundColor}
+                   updateForegroundColor={value => dispatch(updateForegroundColor('value', value))}
+                   backgroundColor={backgroundColor}
+                   updateBackgroundColor={value => dispatch(updateBackgroundColor('value', value))}
+                   fontSize={fontSize}
+                   updateFontSize={value => dispatch(updateFontSize(value))}
+                   isFontBold={isFontBold}
+                   toggleIsFontBold={() => dispatch(toggleIsFontBold())}
+                   accessibilityLevel={accessibilityLevel}
+                   updateAccessibilityLevel={value => dispatch(updateAccessibilityLevel(value))} />
+        {/*
         <div>
           <div className={styles.field}>
             <AccessibilityLevel accessibilityLevel={state.accessibilityLevel}
@@ -57,12 +70,10 @@ export default class App extends Component {
           </div>
         </div>
         <div className={styles.preview}>
-          {/*
           <Graph {...state.focusedChannel}
                  backgroundColor={state.backgroundColor}
                  foregroundColor={state.foregroundColor}
                  accessibleContrast={accessibilityUtils.accessibleContrast(state.accessibilityLevel, state.fontSize.value, state.isFontBold)} />
-          */}
           <Preview accessibilityLevel={state.accessibilityLevel}
                    backgroundColor={state.backgroundColor}
                    foregroundColor={state.foregroundColor}
@@ -73,6 +84,7 @@ export default class App extends Component {
                    updateForegroundColorValue={value => dispatch(updateForegroundColor('value', value))}
                    updateForegroundColorEditMode={value => dispatch(updateForegroundColor('editMode', value))} />
         </div>
+        */}
       </div>
     );
   }

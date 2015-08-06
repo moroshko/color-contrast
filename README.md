@@ -1,13 +1,13 @@
 ## Todo
 
-* Try contenteditable (there is no easy way to dynamically set input's width when the font size changes)
+* foreground color => text color
 * ESC - revert to value prior to edit
-* Tab - move to next field
+* Update URL when input values change (bookmarkable URLs)
 * Publish to Github pages
 * https://github.com/js-org/dns.js.org
 * Add tests for reducers
 * Add eslint
-* Test accessibility: ARIA attributes
+* Test accessibility: ARIA attributes, keyboard navigation
 
 
 
