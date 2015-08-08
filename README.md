@@ -1,7 +1,9 @@
 ## Todo
 
+* Use font size & bold in preview
 * Copy to clipboard preview color
 * (?) Hide preview when there is an error? (javascript error appears now)
+* (?) What if there is no solution for AAA?
 * foreground color => text color
 * react-redux: Connect => connect
 * Tweet button
