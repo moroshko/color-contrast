@@ -8,25 +8,45 @@ export default class Editable extends Component {
     onEditEnd: PropTypes.func.isRequired
   };
 
-  onKeyUp(event) {
-    if (event.which !== 13) {
-      return;
-    }
+  constructor(props) {
+    super(props);
 
+    this.escapePressed = false;
+    this.valueBeforeEdit = null;
+
+    this.onFocus = ::this.onFocus;
+    this.onKeyUp = ::this.onKeyUp;
+    this.onBlur = ::this.onBlur;
+  }
+
+  onFocus(event) {
+    this.valueBeforeEdit = event.currentTarget.value;
+  }
+
+  onBlur(event) {
     const { onEditEnd } = this.props;
+
+    onEditEnd(this.escapePressed ? this.valueBeforeEdit : event.currentTarget.value);
+  }
+
+  onKeyUp(event) {
     const input = event.currentTarget;
 
-    onEditEnd(input.value);
+    this.escapePressed = (event.which === 27);
 
-    input.blur();
+    if (event.which === 13 || event.which === 27) {
+      input.blur();
+    }
   }
 
   render() {
     const { value } = this.props;
 
+    console.log('render', value);
+
     return (
       <input className={styles.input} type="text" defaultValue={value}
-             onKeyUp={::this.onKeyUp} />
+             onFocus={this.onFocus} onKeyUp={this.onKeyUp} onBlur={this.onBlur} />
     );
   }
 }
