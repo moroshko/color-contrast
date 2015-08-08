@@ -1,5 +1,6 @@
 ## Todo
 
+* Create preview
 * foreground color => text color
 * react-redux: Connect => connect
 * ESC - revert to value prior to edit
