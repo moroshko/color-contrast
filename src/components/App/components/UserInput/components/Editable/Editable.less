@@ -1,7 +1,7 @@
 .input {
   width: 100%;
   background-color: transparent;
-  color: #ffffff;
+  color: #000000;
   font-size: inherit;
   font-family: 'Roboto Mono', sans-serif;
   text-align: center;
@@ -10,8 +10,16 @@
   cursor: pointer;
 
   &:focus {
-    background-color: #5d4037;
+    background-color: #9CC3C0;
     border: 0;
     outline: 0;
+  }
+}
+
+.invalid {
+  outline: 2px solid red;
+
+  &:focus {
+    outline: 2px solid red;
   }
 }

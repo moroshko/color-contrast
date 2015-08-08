@@ -1,6 +1,5 @@
 ## Todo
 
-* Fix ESC issue
 * Create preview
 * foreground color => text color
 * react-redux: Connect => connect
