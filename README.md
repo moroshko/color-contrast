@@ -1,8 +1,11 @@
 ## Todo
 
-* Create preview
+* Copy to clipboard preview color
+* (?) Hide preview when there is an error? (javascript error appears now)
 * foreground color => text color
 * react-redux: Connect => connect
+* Tweet button
+* Link to Github
 * Publish to Github pages
 * https://github.com/js-org/dns.js.org
 * Update URL when input values change (bookmarkable URLs)

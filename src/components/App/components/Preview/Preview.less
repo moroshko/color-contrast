@@ -14,11 +14,17 @@
 }
 
 .previewHeader {
-  margin: 0;
+  margin: 0 0 30px;
 }
 
 .newTextColor, .newBackground {
   margin-top: -3px;
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5);
   z-index: 1;
+  cursor: pointer;
+  transition: box-shadow 0.05s cubic-bezier(0.6, 0.04, 0.98, 0.335);
+
+  &:hover {
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5)
+  }
 }
