@@ -5,13 +5,14 @@ import { bindActionCreators } from 'redux';
 import { randomColor, findClosestAccessibleColor } from 'utils/color/color';
 import accessibilityUtils from 'utils/accessibility/accessibility';
 import * as actionCreators from 'flux/actionCreators/app';
+import Header from 'Header/Header';
 import UserInput from 'UserInput/UserInput';
-import AccessibilityLevel from 'AccessibilityLevel/AccessibilityLevel';
-import BackgroundColor from 'BackgroundColor/BackgroundColor';
-import ForegroundColor from 'ForegroundColor/ForegroundColor';
-import Font from 'Font/Font';
+//import AccessibilityLevel from 'AccessibilityLevel/AccessibilityLevel';
+//import BackgroundColor from 'BackgroundColor/BackgroundColor';
+//import ForegroundColor from 'ForegroundColor/ForegroundColor';
+//import Font from 'Font/Font';
 //import Preview from 'Preview/Preview';
-import Graph from 'Graph/Graph';
+//import Graph from 'Graph/Graph';
 
 export default class App extends Component {
   static propTypes = {
@@ -28,6 +29,7 @@ export default class App extends Component {
 
     return (
       <div className={styles.container}>
+        <Header />
         <UserInput foregroundColor={foregroundColor}
                    updateForegroundColor={value => dispatch(updateForegroundColor('value', value))}
                    backgroundColor={backgroundColor}

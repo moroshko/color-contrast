@@ -11,22 +11,13 @@ export default class Toggle extends Component {
 
   render() {
     const { values, currentValue, onChange } = this.props;
+    const otherValue = (currentValue === values[0] ? values[1] : values[0]);
 
     return (
-      <div className={styles.container}>
-        {
-          currentValue === values[0] &&
-          <div onClick={() => onChange(values[1])}>
-            {values[0]}
-          </div>
-        }
-        {
-          currentValue === values[1] &&
-          <div onClick={() => onChange(values[0])}>
-            {values[1]}
-          </div>
-        }
-      </div>
+      <button className={styles.button} type="button"
+              onClick={() => onChange(otherValue)}>
+        {currentValue}
+      </button>
     );
   }
 }

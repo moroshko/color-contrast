@@ -27,42 +27,42 @@ export default class UserInput extends Component {
 
     return (
       <div className={styles.container}>
-        <div>
-          My text color is
-          <span className={styles.colorContainer}>
-            <Editable value={foregroundColor.value}
-                      onEditEnd={updateForegroundColor} />
-          </span>
-        </div>
-        <div>
-          My background color is
-          <span className={styles.colorContainer}>
-            <Editable value={backgroundColor.value}
-                      onEditEnd={updateBackgroundColor} />
-          </span>
-        </div>
-        <div>
-          My font is
-          <span className={styles.fontSizeContainer}>
-            <Editable value={fontSize.value}
-                      onEditEnd={updateFontSize} />
-          </span>
-          px
-          <span className={styles.fontWeightContainer}>
-            <Toggle values={['normal', 'bold']}
-                    currentValue={isFontBold ? 'bold' : 'normal'}
-                    onChange={toggleIsFontBold} />
-          </span>
-          weight
-        </div>
-        <div>
-          My design needs to be
-          <span className={styles.accessibilityLevelContainer}>
-            <Toggle values={['AA', 'AAA']}
-                    currentValue={accessibilityLevel}
-                    onChange={updateAccessibilityLevel} />
-          </span>
-          compliant
+        <div className={styles.innerContainer}>
+          <div>
+            My text color is
+            <span className={styles.colorContainer}>
+              <Editable value={foregroundColor.value}
+                        onEditEnd={updateForegroundColor} />
+            </span>
+            at
+            <span className={styles.fontSizeContainer}>
+              <Editable value={fontSize.value}
+                        onEditEnd={updateFontSize} />
+            </span>
+            px and
+            <span className={styles.fontWeightContainer}>
+              <Toggle values={['regular', 'bold']}
+                      currentValue={isFontBold ? 'bold' : 'regular'}
+                      onChange={toggleIsFontBold} />
+            </span>
+            weight
+          </div>
+          <div>
+            My background color is
+            <span className={styles.colorContainer}>
+              <Editable value={backgroundColor.value}
+                        onEditEnd={updateBackgroundColor} />
+            </span>
+          </div>
+          <div>
+            My design needs to be
+            <span className={styles.accessibilityLevelContainer}>
+              <Toggle values={['AA', 'AAA']}
+                      currentValue={accessibilityLevel}
+                      onChange={updateAccessibilityLevel} />
+            </span>
+            compliant
+          </div>
         </div>
       </div>
     );
