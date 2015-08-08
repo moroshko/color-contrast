@@ -4,6 +4,7 @@ import React, { Component, PropTypes } from 'react';
 import * as actionCreators from 'flux/actionCreators/app';
 import Header from 'Header/Header';
 import UserInput from 'UserInput/UserInput';
+import Preview from 'Preview/Preview';
 
 export default class App extends Component {
   static propTypes = {
@@ -23,14 +24,19 @@ export default class App extends Component {
         <Header />
         <UserInput foregroundColor={foregroundColor}
                    updateForegroundColor={value => dispatch(updateForegroundColor('value', value))}
-                   backgroundColor={backgroundColor}
-                   updateBackgroundColor={value => dispatch(updateBackgroundColor('value', value))}
                    fontSize={fontSize}
                    updateFontSize={value => dispatch(updateFontSize(value))}
                    isFontBold={isFontBold}
                    toggleIsFontBold={() => dispatch(toggleIsFontBold())}
+                   backgroundColor={backgroundColor}
+                   updateBackgroundColor={value => dispatch(updateBackgroundColor('value', value))}
                    accessibilityLevel={accessibilityLevel}
                    updateAccessibilityLevel={value => dispatch(updateAccessibilityLevel(value))} />
+        <Preview foregroundColor={foregroundColor}
+                 fontSize={fontSize}
+                 isFontBold={isFontBold}
+                 backgroundColor={backgroundColor}
+                 accessibilityLevel={accessibilityLevel} />
       </div>
     );
   }
