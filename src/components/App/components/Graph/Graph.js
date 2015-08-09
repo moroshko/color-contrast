@@ -13,7 +13,7 @@ export default class Color extends Component {
   };
 
   replaceChannel(color, colorChannel, colorChannelValue) {
-    const newColor = {...color};
+    const newColor = { ...color };
 
     newColor[colorChannel] = colorChannelValue;
 

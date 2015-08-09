@@ -21,7 +21,7 @@ class Preview extends Component {
     fontSize: PropTypes.object.isRequired,
     isFontBold: PropTypes.bool.isRequired,
     backgroundColor: PropTypes.object.isRequired,
-    accessibilityLevel: PropTypes.string.isRequired,
+    accessibilityLevel: PropTypes.string.isRequired
   };
 
   contrast(color1, color2) {

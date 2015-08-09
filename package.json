@@ -9,9 +9,10 @@
   "author": "Misha Moroshko <michael.moroshko@gmail.com>",
   "scripts": {
     "start": "mkdir -p dist && cp src/index.html dist/ && node server",
+    "lint": "eslint src *.js",
     "test": "mocha --opts mocha.opts",
     "dist": "rm -rf dist/ && mkdir dist && cp src/index.html dist/ && webpack --config webpack.prod.config.js",
-    "build": "npm test && npm run dist",
+    "build": "npm run lint && npm test && npm run dist",
     "deploy": "./scripts/deploy-to-gh-pages.sh"
   },
   "dependencies": {
@@ -20,9 +21,12 @@
   },
   "devDependencies": {
     "babel": "^5.8.21",
+    "babel-eslint": "^4.0.5",
     "babel-loader": "^5.3.2",
     "chai": "^3.2.0",
     "css-loader": "^0.15.6",
+    "eslint": "^1.1.0",
+    "eslint-plugin-react": "^3.2.1",
     "extract-text-webpack-plugin": "^0.8.2",
     "less": "^2.5.1",
     "less-loader": "^2.2.0",

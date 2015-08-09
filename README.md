@@ -13,7 +13,6 @@
 * Mobile view
 * Test accessibility: ARIA attributes, keyboard navigation
 * Add tests for reducers
-* Add eslint
 
 
 ## Links
