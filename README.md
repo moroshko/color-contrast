@@ -1,3 +1,5 @@
+[![Build Status][status-image]][status-url]
+
 ## Todo
 
 * Copy to clipboard preview color: https://github.com/nkbt/react-copy-to-clipboard
@@ -18,3 +20,7 @@
 
 * http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef
 * http://www.w3.org/TR/2008/REC-WCAG20-20081211/#visual-audio-contrast-contrast
+
+
+[status-image]: https://img.shields.io/codeship/1fe3f0a0-20bb-0133-934f-5ae45cb2c8e5/master.svg
+[status-url]: https://codeship.com/projects/95718
