@@ -7,7 +7,7 @@ import { findClosestAccessibleColor, contrast } from 'utils/color/color';
 
 function mapStateToProps(state) {
   return {
-    foregroundColor: state.foregroundColor,
+    textColor: state.textColor,
     fontSize: state.fontSize,
     isFontBold: state.isFontBold,
     backgroundColor: state.backgroundColor,
@@ -17,7 +17,7 @@ function mapStateToProps(state) {
 
 class Preview extends Component {
   static propTypes = {
-    foregroundColor: PropTypes.object.isRequired,
+    textColor: PropTypes.object.isRequired,
     fontSize: PropTypes.object.isRequired,
     isFontBold: PropTypes.bool.isRequired,
     backgroundColor: PropTypes.object.isRequired,
@@ -29,19 +29,19 @@ class Preview extends Component {
   }
 
   render() {
-    const { foregroundColor, fontSize, isFontBold,
+    const { textColor, fontSize, isFontBold,
             backgroundColor, accessibilityLevel } = this.props;
     const contrastRatio = accessibleContrast(accessibilityLevel, fontSize, isFontBold);
     const originalStyle = {
-      color: foregroundColor.value,
+      color: textColor.value,
       backgroundColor: backgroundColor.value
     };
     const newBackgroundStyle = {
-      color: foregroundColor.value,
-      backgroundColor: findClosestAccessibleColor(backgroundColor.value, foregroundColor.value, contrastRatio)
+      color: textColor.value,
+      backgroundColor: findClosestAccessibleColor(backgroundColor.value, textColor.value, contrastRatio)
     };
-    const newForegroundStyle = {
-      color: findClosestAccessibleColor(foregroundColor.value, backgroundColor.value, contrastRatio),
+    const newTextStyle = {
+      color: findClosestAccessibleColor(textColor.value, backgroundColor.value, contrastRatio),
       backgroundColor: backgroundColor.value
     };
 
@@ -57,15 +57,15 @@ class Preview extends Component {
           <div className={styles.preview}
                style={originalStyle}>
             <h2 className={styles.previewHeader}>original</h2>
-            <p>{foregroundColor.value} text</p>
+            <p>{textColor.value} text</p>
             <p>{backgroundColor.value} background</p>
             <p>contrast: {this.contrast(originalStyle.color, originalStyle.backgroundColor)}</p>
           </div>
           <div className={styles.newTextColor + ' ' + styles.preview}
-               style={newForegroundStyle}>
+               style={newTextStyle}>
             <h2 className={styles.previewHeader}>new text color</h2>
-            <p>{newForegroundStyle.color} text</p>
-            <p>contrast: {this.contrast(newForegroundStyle.color, newForegroundStyle.backgroundColor)}</p>
+            <p>{newTextStyle.color} text</p>
+            <p>contrast: {this.contrast(newTextStyle.color, newTextStyle.backgroundColor)}</p>
           </div>
         </div>
       </div>

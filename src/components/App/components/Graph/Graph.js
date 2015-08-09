@@ -8,7 +8,7 @@ export default class Color extends Component {
     isBackgroundColor: PropTypes.bool.isRequired,
     colorChannel: PropTypes.string.isRequired,
     backgroundColor: PropTypes.object.isRequired,
-    foregroundColor: PropTypes.object.isRequired,
+    textColor: PropTypes.object.isRequired,
     accessibleContrast: PropTypes.number.isRequired
   };
 
@@ -25,13 +25,13 @@ export default class Color extends Component {
   }
 
   render() {
-    const { isBackgroundColor, colorChannel, backgroundColor, foregroundColor,
+    const { isBackgroundColor, colorChannel, backgroundColor, textColor,
             accessibleContrast } = this.props;
-    const yAxisName = (isBackgroundColor ? 'Background' : 'Foreground') +
+    const yAxisName = (isBackgroundColor ? 'Background' : 'Text') +
                       ' color ' + colorChannel;
     const yMaxValue = (colorChannel === 'hue' ? 360 : 100);
-    const color = (isBackgroundColor ? backgroundColor: foregroundColor);
-    const otherColor = (isBackgroundColor ? foregroundColor: backgroundColor);
+    const color = (isBackgroundColor ? backgroundColor: textColor);
+    const otherColor = (isBackgroundColor ? textColor: backgroundColor);
     const yValue = parseFloat(color[colorChannel]);
 
     let data = [];

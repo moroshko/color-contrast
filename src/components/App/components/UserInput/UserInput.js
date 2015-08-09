@@ -2,14 +2,14 @@ import styles from './UserInput.less';
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { updateForegroundColor, updateFontSize, toggleIsFontBold,
+import { updateTextColor, updateFontSize, toggleIsFontBold,
          updateBackgroundColor, updateAccessibilityLevel } from 'flux/actionCreators/app';
 import Editable from 'Editable/Editable';
 import Toggle from 'Toggle/Toggle';
 
 function mapStateToProps(state) {
   return {
-    foregroundColor: state.foregroundColor,
+    textColor: state.textColor,
     fontSize: state.fontSize,
     isFontBold: state.isFontBold,
     backgroundColor: state.backgroundColor,
@@ -19,7 +19,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    updateForegroundColor: value => dispatch(updateForegroundColor('value', value)),
+    updateTextColor: value => dispatch(updateTextColor('value', value)),
     updateFontSize: value => dispatch(updateFontSize(value)),
     toggleIsFontBold: () => dispatch(toggleIsFontBold()),
     updateBackgroundColor: value => dispatch(updateBackgroundColor('value', value)),
@@ -29,8 +29,8 @@ function mapDispatchToProps(dispatch) {
 
 class UserInput extends Component {
   static propTypes = {
-    foregroundColor: PropTypes.object.isRequired,
-    updateForegroundColor: PropTypes.func.isRequired,
+    textColor: PropTypes.object.isRequired,
+    updateTextColor: PropTypes.func.isRequired,
     fontSize: PropTypes.object.isRequired,
     updateFontSize: PropTypes.func.isRequired,
     isFontBold: PropTypes.bool.isRequired,
@@ -42,7 +42,7 @@ class UserInput extends Component {
   };
 
   render() {
-    const { foregroundColor, updateForegroundColor,
+    const { textColor, updateTextColor,
             fontSize, updateFontSize,
             isFontBold, toggleIsFontBold,
             backgroundColor, updateBackgroundColor,
@@ -54,9 +54,9 @@ class UserInput extends Component {
           <div>
             My text color is
             <span className={styles.colorContainer}>
-              <Editable isValid={foregroundColor.isValueValid}
-                        value={foregroundColor.value}
-                        onChange={updateForegroundColor}
+              <Editable isValid={textColor.isValueValid}
+                        value={textColor.value}
+                        onChange={updateTextColor}
                         textAlign="center" />
             </span>
             at

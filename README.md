@@ -4,7 +4,6 @@
 * Copy to clipboard preview color: https://github.com/nkbt/react-copy-to-clipboard
 * (?) Hide preview when there is an error? (javascript error appears now)
 * (?) What if there is no solution for AAA?
-* foreground color => text color
 * Tweet button
 * Link to Github
 * Publish to Github pages

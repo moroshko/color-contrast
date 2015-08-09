@@ -3,7 +3,7 @@ import numberUtils from 'utils/number/number';
 import {
   UPDATE_ACCESSIBILITY_LEVEL,
   UPDATE_BACKGROUND_COLOR,
-  UPDATE_FOREGROUND_COLOR,
+  UPDATE_TEXT_COLOR,
   UPDATE_FONT_SIZE,
   TOGGLE_IS_FONT_BOLD,
   UPDATE_FOCUSED_CHANNEL
@@ -12,9 +12,9 @@ import { UPDATE_COLOR } from 'flux/constants/actionTypes/color';
 import colorReducer from 'flux/reducers/color';
 
 const initialBackgroundColor = '#eeeeee';
-const initialForegroundColor = '#747474';
+const initialTextColor = '#747474';
 const initialBackgroundColorHSL = colorUtils.str2hsl(initialBackgroundColor);
-const initialForegroundColorHSL = colorUtils.str2hsl(initialForegroundColor);
+const initialTextColorHSL = colorUtils.str2hsl(initialTextColor);
 const initialState = {
   accessibilityLevel: 'AA',
   backgroundColor: {
@@ -28,15 +28,15 @@ const initialState = {
     lightness: initialBackgroundColorHSL.l.toString(),
     editMode: true
   },
-  foregroundColor: {
+  textColor: {
     isValueValid: true,
-    value: initialForegroundColor,
+    value: initialTextColor,
     isHueValid: true,
-    hue: initialForegroundColorHSL.h.toString(),
+    hue: initialTextColorHSL.h.toString(),
     isSaturationValid: true,
-    saturation: initialForegroundColorHSL.s.toString(),
+    saturation: initialTextColorHSL.s.toString(),
     isLightnessValid: true,
-    lightness: initialForegroundColorHSL.l.toString(),
+    lightness: initialTextColorHSL.l.toString(),
     editMode: false
   },
   fontSize: {
@@ -65,10 +65,10 @@ export default function(state = initialState, action) {
         })
       };
 
-    case UPDATE_FOREGROUND_COLOR:
+    case UPDATE_TEXT_COLOR:
       return {
         ...state,
-        foregroundColor: colorReducer(state.foregroundColor, {
+        textColor: colorReducer(state.textColor, {
           type: UPDATE_COLOR,
           field: action.field,
           value: action.value

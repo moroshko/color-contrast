@@ -1,7 +1,7 @@
 import {
   UPDATE_ACCESSIBILITY_LEVEL,
   UPDATE_BACKGROUND_COLOR,
-  UPDATE_FOREGROUND_COLOR,
+  UPDATE_TEXT_COLOR,
   UPDATE_FONT_SIZE,
   TOGGLE_IS_FONT_BOLD,
   UPDATE_FOCUSED_CHANNEL
@@ -22,9 +22,9 @@ export function updateBackgroundColor(field, value) {
   };
 }
 
-export function updateForegroundColor(field, value) {
+export function updateTextColor(field, value) {
   return {
-    type: UPDATE_FOREGROUND_COLOR,
+    type: UPDATE_TEXT_COLOR,
     field,
     value
   };
