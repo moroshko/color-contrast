@@ -12,7 +12,7 @@
     "test": "mocha --opts mocha.opts",
     "dist": "rm -rf dist/ && mkdir dist && cp src/index.html dist/ && webpack --config webpack.prod.config.js",
     "build": "npm test && npm run dist",
-    "deploy": "./scripts/deploy-to-gh-pages"
+    "deploy": "./scripts/deploy-to-gh-pages.sh"
   },
   "dependencies": {
     "react": "^0.14.0-beta3",
