@@ -54,22 +54,36 @@ class Preview extends Component {
         <div className={styles.innerContainer}>
           <div className={styles.newBackground + ' ' + styles.preview}
                style={newBackgroundStyle}>
-            <h2 className={styles.previewHeader}>new background</h2>
-            <p>{newBackgroundStyle.backgroundColor} background</p>
-            <p>contrast: {this.contrast(newBackgroundStyle.color, newBackgroundStyle.backgroundColor)}</p>
+            <h2 className={styles.previewHeader}>
+              new background
+            </h2>
+            <p className={styles.previewContent}>
+              {newBackgroundStyle.backgroundColor}
+            </p>
+            <p className={styles.previewFooter}>
+              contrast: {this.contrast(newBackgroundStyle.color, newBackgroundStyle.backgroundColor)}
+            </p>
           </div>
           <div className={styles.preview}
                style={originalStyle}>
-            <h2 className={styles.previewHeader}>original</h2>
-            <p>{textColor.value} text</p>
-            <p>{backgroundColor.value} background</p>
-            <p>contrast: {this.contrast(originalStyle.color, originalStyle.backgroundColor)}</p>
+            <h2 className={styles.previewHeader}>
+              original
+            </h2>
+            <p className={styles.previewFooter}>
+              contrast: {this.contrast(originalStyle.color, originalStyle.backgroundColor)}
+            </p>
           </div>
           <div className={styles.newTextColor + ' ' + styles.preview}
                style={newTextStyle}>
-            <h2 className={styles.previewHeader}>new text color</h2>
-            <p>{newTextStyle.color} text</p>
-            <p>contrast: {this.contrast(newTextStyle.color, newTextStyle.backgroundColor)}</p>
+            <h2 className={styles.previewHeader}>
+              new text color
+            </h2>
+            <p className={styles.previewContent}>
+              {newTextStyle.color}
+            </p>
+            <p className={styles.previewFooter}>
+              contrast: {this.contrast(newTextStyle.color, newTextStyle.backgroundColor)}
+            </p>
           </div>
         </div>
       </div>
