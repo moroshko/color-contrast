@@ -20,12 +20,12 @@ export default class Editable extends Component {
   }
 
   onFocus(event) {
-    this.valueBeforeEdit = event.currentTarget.value;
+    this.valueBeforeEdit = event.target.value;
   }
 
   onKeyUp(event) {
     const { onChange } = this.props;
-    const input = event.currentTarget;
+    const input = event.target;
 
     switch (event.which) {
       case 13: // enter
@@ -46,7 +46,7 @@ export default class Editable extends Component {
       <input className={styles.input + ' ' + (isValid ? '' : styles.invalid)}
              type="text" value={value} style={{ textAlign }}
              onFocus={this.onFocus} onKeyUp={this.onKeyUp}
-             onChange={event => onChange(event.currentTarget.value)} />
+             onChange={event => onChange(event.target.value)} />
     );
   }
 }
