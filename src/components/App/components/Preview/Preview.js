@@ -31,7 +31,7 @@ class Preview extends Component {
   render() {
     const { textColor, fontSize, isFontBold,
             backgroundColor, accessibilityLevel } = this.props;
-    const contrastRatio = accessibleContrast(accessibilityLevel, fontSize, isFontBold);
+    const contrastRatio = accessibleContrast(accessibilityLevel, parseInt(fontSize.value, 10), isFontBold);
     const containerStyle = {
       fontSize: fontSize.value,
       fontWeight: isFontBold ? 'bold' : 'normal'
