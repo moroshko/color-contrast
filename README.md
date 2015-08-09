@@ -5,7 +5,6 @@
 * (?) What if there is no solution for AAA?
 * Tweet button
 * Link to Github
-* Publish to Github pages
 * https://github.com/js-org/dns.js.org
 * Update URL when input values change (bookmarkable URLs)
 * Mobile view
