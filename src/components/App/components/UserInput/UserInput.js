@@ -1,28 +1,51 @@
 import styles from './UserInput.less';
 
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { updateForegroundColor, updateFontSize, toggleIsFontBold,
+         updateBackgroundColor, updateAccessibilityLevel } from 'flux/actionCreators/app';
 import Editable from 'Editable/Editable';
 import Toggle from 'Toggle/Toggle';
 
-export default class UserInput extends Component {
+function mapStateToProps(state) {
+  return {
+    foregroundColor: state.foregroundColor,
+    fontSize: state.fontSize,
+    isFontBold: state.isFontBold,
+    backgroundColor: state.backgroundColor,
+    accessibilityLevel: state.accessibilityLevel
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    updateForegroundColor: value => dispatch(updateForegroundColor('value', value)),
+    updateFontSize: value => dispatch(updateFontSize(value)),
+    toggleIsFontBold: () => dispatch(toggleIsFontBold()),
+    updateBackgroundColor: value => dispatch(updateBackgroundColor('value', value)),
+    updateAccessibilityLevel: value => dispatch(updateAccessibilityLevel(value))
+  };
+}
+
+class UserInput extends Component {
   static propTypes = {
     foregroundColor: PropTypes.object.isRequired,
     updateForegroundColor: PropTypes.func.isRequired,
-    backgroundColor: PropTypes.object.isRequired,
-    updateBackgroundColor: PropTypes.func.isRequired,
     fontSize: PropTypes.object.isRequired,
     updateFontSize: PropTypes.func.isRequired,
     isFontBold: PropTypes.bool.isRequired,
     toggleIsFontBold: PropTypes.func.isRequired,
+    backgroundColor: PropTypes.object.isRequired,
+    updateBackgroundColor: PropTypes.func.isRequired,
     accessibilityLevel: PropTypes.string.isRequired,
     updateAccessibilityLevel: PropTypes.func.isRequired
   };
 
   render() {
     const { foregroundColor, updateForegroundColor,
-            backgroundColor, updateBackgroundColor,
             fontSize, updateFontSize,
             isFontBold, toggleIsFontBold,
+            backgroundColor, updateBackgroundColor,
             accessibilityLevel, updateAccessibilityLevel } = this.props;
 
     return (
@@ -74,3 +97,5 @@ export default class UserInput extends Component {
     );
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserInput);

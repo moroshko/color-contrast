@@ -1,10 +1,21 @@
 import styles from './Preview.less';
 
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { accessibleContrast } from 'utils/accessibility/accessibility';
 import { findClosestAccessibleColor, contrast } from 'utils/color/color';
 
-export default class Preview extends Component {
+function mapStateToProps(state) {
+  return {
+    foregroundColor: state.foregroundColor,
+    fontSize: state.fontSize,
+    isFontBold: state.isFontBold,
+    backgroundColor: state.backgroundColor,
+    accessibilityLevel: state.accessibilityLevel
+  };
+}
+
+class Preview extends Component {
   static propTypes = {
     foregroundColor: PropTypes.object.isRequired,
     fontSize: PropTypes.object.isRequired,
@@ -61,3 +72,5 @@ export default class Preview extends Component {
     );
   }
 }
+
+export default connect(mapStateToProps)(Preview);
