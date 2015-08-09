@@ -7,7 +7,7 @@ export default class Editable extends Component {
     isValid: PropTypes.bool.isRequired,
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
-    textAlign: PropTypes.string.isRequired,
+    textAlign: PropTypes.string.isRequired
   };
 
   constructor(props) {
@@ -28,11 +28,11 @@ export default class Editable extends Component {
     const input = event.currentTarget;
 
     switch (event.which) {
-      case 13:
+      case 13: // enter
         input.blur();
         break;
 
-      case 27:
+      case 27: // esc
         input.blur();
         onChange(this.valueBeforeEdit);
         break;

@@ -41,7 +41,7 @@ const initialState = {
   },
   fontSize: {
     isValid: true,
-    value: '26'
+    value: '16'
   },
   isFontBold: false,
   focusedChannel: null

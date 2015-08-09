@@ -1,6 +1,5 @@
 ## Todo
 
-* Use font size & bold in preview
 * Copy to clipboard preview color: https://github.com/nkbt/react-copy-to-clipboard
 * (?) Hide preview when there is an error? (javascript error appears now)
 * (?) What if there is no solution for AAA?
@@ -9,11 +8,10 @@
 * Publish to Github pages
 * https://github.com/js-org/dns.js.org
 * Update URL when input values change (bookmarkable URLs)
-* Add tests for reducers
-* Add eslint
 * Mobile view
 * Test accessibility: ARIA attributes, keyboard navigation
-
+* Add tests for reducers
+* Add eslint
 
 
 ## Links

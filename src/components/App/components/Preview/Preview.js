@@ -32,6 +32,10 @@ class Preview extends Component {
     const { textColor, fontSize, isFontBold,
             backgroundColor, accessibilityLevel } = this.props;
     const contrastRatio = accessibleContrast(accessibilityLevel, fontSize, isFontBold);
+    const containerStyle = {
+      fontSize: fontSize.value,
+      fontWeight: isFontBold ? 'bold' : 'normal'
+    };
     const originalStyle = {
       color: textColor.value,
       backgroundColor: backgroundColor.value
@@ -46,7 +50,7 @@ class Preview extends Component {
     };
 
     return (
-      <div className={styles.container}>
+      <div className={styles.container} style={containerStyle}>
         <div className={styles.innerContainer}>
           <div className={styles.newBackground + ' ' + styles.preview}
                style={newBackgroundStyle}>
