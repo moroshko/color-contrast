@@ -1,11 +1,9 @@
 ## Todo
 
-* Copy to clipboard preview color: https://github.com/nkbt/react-copy-to-clipboard
-* Add graph
-* (?) Hide preview when there is an error? (javascript error appears now)
+* Copy to clipboard success feedback
 * (?) What if there is no solution for AAA?
 * (?) If the entered values give an accessible contrast, there is not point to show the preview.
-* Preview is broken in Safari (flexbox?)
+* Add graph
 * Tweet button
 * Link to Github
 * Update URL when input values change (bookmarkable URLs)
