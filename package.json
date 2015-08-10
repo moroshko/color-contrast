@@ -18,9 +18,11 @@
   },
   "dependencies": {
     "react": "^0.14.0-beta3",
-    "react-dom": "^0.14.0-beta3"
+    "react-dom": "^0.14.0-beta3",
+    "react-zeroclipboard": "moroshko/react-zeroclipboard"
   },
   "devDependencies": {
+    "autoprefixer-loader": "^2.0.0",
     "babel": "^5.8.21",
     "babel-eslint": "^4.0.5",
     "babel-loader": "^5.3.2",

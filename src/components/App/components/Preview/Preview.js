@@ -2,6 +2,7 @@ import styles from './Preview.less';
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import ReactZeroClipboard from 'react-zeroclipboard';
 import { accessibleContrast } from 'utils/accessibility/accessibility';
 import { findClosestAccessibleColor, contrast } from 'utils/color/color';
 
@@ -52,18 +53,20 @@ class Preview extends Component {
     return (
       <div className={styles.container} style={containerStyle}>
         <div className={styles.innerContainer}>
-          <div className={styles.newBackground + ' ' + styles.preview}
-               style={newBackgroundStyle}>
-            <h2 className={styles.previewHeader}>
-              new background
-            </h2>
-            <p className={styles.previewContent}>
-              {newBackgroundStyle.backgroundColor}
-            </p>
-            <p className={styles.previewFooter}>
-              contrast: {this.contrast(newBackgroundStyle.color, newBackgroundStyle.backgroundColor)}
-            </p>
-          </div>
+          <ReactZeroClipboard text={newBackgroundStyle.backgroundColor}>
+            <div className={styles.newBackground + ' ' + styles.preview}
+                 style={newBackgroundStyle}>
+              <h2 className={styles.previewHeader}>
+                new background
+              </h2>
+              <p className={styles.previewContent}>
+                {newBackgroundStyle.backgroundColor}
+              </p>
+              <p className={styles.previewFooter}>
+                contrast: {this.contrast(newBackgroundStyle.color, newBackgroundStyle.backgroundColor)}
+              </p>
+            </div>
+          </ReactZeroClipboard>
           <div className={styles.preview}
                style={originalStyle}>
             <h2 className={styles.previewHeader}>
@@ -73,18 +76,20 @@ class Preview extends Component {
               contrast: {this.contrast(originalStyle.color, originalStyle.backgroundColor)}
             </p>
           </div>
-          <div className={styles.newTextColor + ' ' + styles.preview}
-               style={newTextStyle}>
-            <h2 className={styles.previewHeader}>
-              new text color
-            </h2>
-            <p className={styles.previewContent}>
-              {newTextStyle.color}
-            </p>
-            <p className={styles.previewFooter}>
-              contrast: {this.contrast(newTextStyle.color, newTextStyle.backgroundColor)}
-            </p>
-          </div>
+          <ReactZeroClipboard text={newTextStyle.color}>
+            <div className={styles.newTextColor + ' ' + styles.preview}
+                 style={newTextStyle}>
+              <h2 className={styles.previewHeader}>
+                new text color
+              </h2>
+              <p className={styles.previewContent}>
+                {newTextStyle.color}
+              </p>
+              <p className={styles.previewFooter}>
+                contrast: {this.contrast(newTextStyle.color, newTextStyle.backgroundColor)}
+              </p>
+            </div>
+          </ReactZeroClipboard>
         </div>
       </div>
     );

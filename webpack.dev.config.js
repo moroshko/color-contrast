@@ -26,7 +26,7 @@ module.exports = {
       include: path.join(__dirname, 'node_modules') // Must be an absolute path
     }, {
       test: /\.less$/,
-      loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[name]__[local]___[hash:base64:5]!less'),
+      loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[name]__[local]___[hash:base64:5]!autoprefixer!less'),
       exclude: /node_modules/
     }]
   },
