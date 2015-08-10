@@ -8,21 +8,28 @@
   },
   "author": "Misha Moroshko <michael.moroshko@gmail.com>",
   "scripts": {
-    "start": "mkdir -p dist && cp src/index.html dist/ && node server",
+    "start": "mkdir -p dist && npm run copy-static-files && node server",
+    "lint": "eslint src *.js",
     "test": "mocha --opts mocha.opts",
-    "dist": "rm -rf dist/ && mkdir dist && cp src/index.html dist/ && webpack --config webpack.prod.config.js",
-    "build": "npm test && npm run dist",
+    "copy-static-files": "cp src/index.html src/favicon.png dist/",
+    "dist": "rm -rf dist/ && mkdir dist && npm run copy-static-files && webpack --config webpack.prod.config.js",
+    "build": "npm run lint && npm test && npm run dist",
     "deploy": "./scripts/deploy-to-gh-pages.sh"
   },
   "dependencies": {
     "react": "^0.14.0-beta3",
-    "react-dom": "^0.14.0-beta3"
+    "react-dom": "^0.14.0-beta3",
+    "react-zeroclipboard": "moroshko/react-zeroclipboard"
   },
   "devDependencies": {
+    "autoprefixer-loader": "^2.0.0",
     "babel": "^5.8.21",
+    "babel-eslint": "^4.0.5",
     "babel-loader": "^5.3.2",
     "chai": "^3.2.0",
     "css-loader": "^0.15.6",
+    "eslint": "^1.1.0",
+    "eslint-plugin-react": "^3.2.1",
     "extract-text-webpack-plugin": "^0.8.2",
     "less": "^2.5.1",
     "less-loader": "^2.2.0",

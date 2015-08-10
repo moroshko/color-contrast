@@ -231,41 +231,6 @@ function contrast(str1, str2) {
 
 function findClosestAccessibleDarkerColor(adjustableColor, otherColor, contrastRatio) {
   let { h, s, l } = str2hsl(adjustableColor);
-  let min = 0, minColor = hsl2str({ h, s, l: 0 });
-
-  if (contrast(adjustableColor, otherColor) < contrastRatio) {
-    if (contrast(minColor, otherColor) < contrastRatio) {
-      return null;
-    }
-
-    let max = l, maxColor = hsl2str({ h, s, l });
-    let lastMinColor, lastMaxColor;
-
-    while (minColor !== lastMinColor || maxColor !== lastMaxColor) {
-      lastMinColor = minColor;
-      lastMaxColor = maxColor;
-
-      l = (min + max) / 2;
-      adjustableColor = hsl2str({ h, s, l });
-
-      if (contrast(adjustableColor, otherColor) >= contrastRatio) {
-        min = l;
-        minColor = hsl2str({ h, s, l });
-      } else {
-        max = l;
-        maxColor = hsl2str({ h, s, l });
-      }
-    }
-  }
-
-  return {
-    color: minColor,
-    lightness: min
-  };
-}
-
-function findClosestAccessibleDarkerColor(adjustableColor, otherColor, contrastRatio) {
-  let { h, s, l } = str2hsl(adjustableColor);
 
   if (contrast(adjustableColor, otherColor) >= contrastRatio) {
     return {
