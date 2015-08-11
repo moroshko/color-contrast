@@ -104,7 +104,7 @@ class Preview extends Component {
             </ReactZeroClipboard>
             {
               backgroundColorCopied &&
-                <p>
+                <p className={styles.copiedToClipboard}>
                   Copied to clipboard
                 </p>
             }
@@ -140,7 +140,7 @@ class Preview extends Component {
             </ReactZeroClipboard>
             {
               textColorCopied &&
-                <p>
+                <p className={styles.copiedToClipboard}>
                   Copied to clipboard
                 </p>
             }
