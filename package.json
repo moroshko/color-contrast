@@ -9,7 +9,7 @@
   "author": "Misha Moroshko <michael.moroshko@gmail.com>",
   "scripts": {
     "start": "mkdir -p dist && npm run copy-static-files && node server",
-    "lint": "eslint src *.js",
+    "lint": "eslint src server.js webpack.dev.config.js webpack.prod.config.js",
     "test": "mocha --opts mocha.opts",
     "copy-static-files": "cp src/index.html src/favicon.png dist/",
     "dist": "rm -rf dist/ && mkdir dist && npm run copy-static-files && webpack --config webpack.prod.config.js",

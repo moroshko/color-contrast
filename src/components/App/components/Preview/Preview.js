@@ -2,6 +2,7 @@ import styles from './Preview.less';
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { updateTextColorCopied, updateBackgroundColorCopied } from 'flux/actionCreators/app';
 import ReactZeroClipboard from 'react-zeroclipboard';
 import { accessibleContrast } from 'utils/accessibility/accessibility';
 import { findClosestAccessibleColor, contrast } from 'utils/color/color';
@@ -12,7 +13,16 @@ function mapStateToProps(state) {
     fontSize: state.fontSize,
     isFontBold: state.isFontBold,
     backgroundColor: state.backgroundColor,
-    accessibilityLevel: state.accessibilityLevel
+    accessibilityLevel: state.accessibilityLevel,
+    textColorCopied: state.textColorCopied,
+    backgroundColorCopied: state.backgroundColorCopied
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    updateTextColorCopied: value => dispatch(updateTextColorCopied(value)),
+    updateBackgroundColorCopied: value => dispatch(updateBackgroundColorCopied(value))
   };
 }
 
@@ -22,17 +32,40 @@ class Preview extends Component {
     fontSize: PropTypes.object.isRequired,
     isFontBold: PropTypes.bool.isRequired,
     backgroundColor: PropTypes.object.isRequired,
-    accessibilityLevel: PropTypes.string.isRequired
+    accessibilityLevel: PropTypes.string.isRequired,
+    textColorCopied: PropTypes.bool.isRequired,
+    backgroundColorCopied: PropTypes.bool.isRequired,
+    updateTextColorCopied: PropTypes.func.isRequired,
+    updateBackgroundColorCopied: PropTypes.func.isRequired
   };
 
   contrast(color1, color2) {
     return Math.round(1000 * contrast(color1, color2)) / 1000;
   }
 
+  onBackgroundColorCopy() {
+    const { updateBackgroundColorCopied } = this.props;
+
+    updateBackgroundColorCopied(true);
+
+    setTimeout(() => updateBackgroundColorCopied(false), 5000);
+  }
+
+  onTextColorCopy() {
+    const { updateTextColorCopied } = this.props;
+
+    updateTextColorCopied(true);
+
+    setTimeout(() => updateTextColorCopied(false), 5000);
+  }
+
   render() {
     const { textColor, fontSize, isFontBold,
-            backgroundColor, accessibilityLevel } = this.props;
-    const contrastRatio = accessibleContrast(accessibilityLevel, parseInt(fontSize.value, 10), isFontBold);
+            backgroundColor, accessibilityLevel,
+            textColorCopied, backgroundColorCopied,
+            updateTextColorCopied } = this.props;
+    const contrastRatio =
+      accessibleContrast(accessibilityLevel, parseInt(fontSize.value, 10), isFontBold);
     const containerStyle = {
       fontSize: fontSize.value,
       fontWeight: isFontBold ? 'bold' : 'normal'
@@ -53,47 +86,69 @@ class Preview extends Component {
     return (
       <div className={styles.container} style={containerStyle}>
         <div className={styles.innerContainer}>
-          <ReactZeroClipboard text={newBackgroundStyle.backgroundColor}>
-            <div className={styles.newBackground + ' ' + styles.preview}
-                 style={newBackgroundStyle}>
-              <h2 className={styles.previewHeader}>
-                new background
-              </h2>
-              <p className={styles.previewContent}>
-                {newBackgroundStyle.backgroundColor}
-              </p>
-              <p className={styles.previewFooter}>
-                contrast: {this.contrast(newBackgroundStyle.color, newBackgroundStyle.backgroundColor)}
-              </p>
-            </div>
-          </ReactZeroClipboard>
-          <div className={styles.preview}
-               style={originalStyle}>
-            <h2 className={styles.previewHeader}>
-              original
+          <div className={styles.previewContainer}>
+            <h2 className={styles.previewTitle}>
+              New background
             </h2>
-            <p className={styles.previewFooter}>
-              contrast: {this.contrast(originalStyle.color, originalStyle.backgroundColor)}
-            </p>
+            <ReactZeroClipboard text={newBackgroundStyle.backgroundColor}
+                                onAfterCopy={::this.onBackgroundColorCopy}>
+              <div className={styles.previewContent + ' ' + styles.previewContentCopyable}
+                   style={newBackgroundStyle}>
+                <p className={styles.previewNewColor}>
+                  {newBackgroundStyle.backgroundColor}
+                </p>
+                <p className={styles.previewContrast}>
+                  contrast: {this.contrast(newBackgroundStyle.color, newBackgroundStyle.backgroundColor)}
+                </p>
+              </div>
+            </ReactZeroClipboard>
+            {
+              backgroundColorCopied &&
+                <p>
+                  Copied to clipboard
+                </p>
+            }
           </div>
-          <ReactZeroClipboard text={newTextStyle.color}>
-            <div className={styles.newTextColor + ' ' + styles.preview}
-                 style={newTextStyle}>
-              <h2 className={styles.previewHeader}>
-                new text color
-              </h2>
-              <p className={styles.previewContent}>
-                {newTextStyle.color}
+          <div className={styles.previewContainer}>
+            <h2 className={styles.previewTitle}>
+              Original
+            </h2>
+            <div className={styles.previewContent} style={originalStyle}>
+              <p className={styles.previewNewColor}>
+                &nbsp;
               </p>
-              <p className={styles.previewFooter}>
-                contrast: {this.contrast(newTextStyle.color, newTextStyle.backgroundColor)}
+              <p className={styles.previewContrast}>
+                contrast: {this.contrast(originalStyle.color, originalStyle.backgroundColor)}
               </p>
             </div>
-          </ReactZeroClipboard>
+          </div>
+          <div className={styles.previewContainer}>
+            <h2 className={styles.previewTitle}>
+              New text color
+            </h2>
+            <ReactZeroClipboard text={newTextStyle.color}
+                                onAfterCopy={::this.onTextColorCopy}>
+              <div className={styles.previewContent + ' ' + styles.previewContentCopyable}
+                   style={newTextStyle}>
+                <p className={styles.previewNewColor}>
+                  {newTextStyle.color}
+                </p>
+                <p className={styles.previewContrast}>
+                  contrast: {this.contrast(newTextStyle.color, newTextStyle.backgroundColor)}
+                </p>
+              </div>
+            </ReactZeroClipboard>
+            {
+              textColorCopied &&
+                <p>
+                  Copied to clipboard
+                </p>
+            }
+          </div>
         </div>
       </div>
     );
   }
 }
 
-export default connect(mapStateToProps)(Preview);
+export default connect(mapStateToProps, mapDispatchToProps)(Preview);

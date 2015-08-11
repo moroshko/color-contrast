@@ -5,7 +5,7 @@ export default function(state, action) {
   let { value, isValueValid,
         hue, isHueValid,
         saturation, isSaturationValid,
-        lightness, isLightnessValid, editMode } = state;
+        lightness, isLightnessValid } = state;
 
   function updateHSLifValueValid() {
     if (isValueValid) {
@@ -27,8 +27,7 @@ export default function(state, action) {
       isSaturationValid,
       saturation,
       isLightnessValid,
-      lightness,
-      editMode
+      lightness
     };
   }
 
@@ -82,12 +81,6 @@ export default function(state, action) {
       isLightnessValid = colorUtils.isLightnessValid(lightness);
 
       return updateValueIfHSLvalid();
-
-    case 'editMode':
-      return {
-        ...state,
-        editMode: action.value
-      };
 
     default:
       return state;
