@@ -5,9 +5,7 @@ import {
   UPDATE_FONT_SIZE,
   TOGGLE_IS_FONT_BOLD,
   UPDATE_BACKGROUND_COLOR,
-  UPDATE_ACCESSIBILITY_LEVEL,
-  UPDATE_TEXT_COLOR_COPIED,
-  UPDATE_BACKGROUND_COLOR_COPIED
+  UPDATE_ACCESSIBILITY_LEVEL
 } from 'flux/constants/actionTypes/app';
 import { UPDATE_COLOR } from 'flux/constants/actionTypes/color';
 import colorReducer from 'flux/reducers/color';
@@ -42,9 +40,7 @@ const initialState = {
     isLightnessValid: true,
     lightness: initialBackgroundColorHSL.l.toString()
   },
-  accessibilityLevel: 'AA',
-  textColorCopied: false,
-  backgroundColorCopied: false
+  accessibilityLevel: 'AA'
 };
 
 export default function(state = initialState, action) {
@@ -88,18 +84,6 @@ export default function(state = initialState, action) {
       return {
         ...state,
         accessibilityLevel: action.value
-      };
-
-    case UPDATE_TEXT_COLOR_COPIED:
-      return {
-        ...state,
-        textColorCopied: action.value
-      };
-
-    case UPDATE_BACKGROUND_COLOR_COPIED:
-      return {
-        ...state,
-        backgroundColorCopied: action.value
       };
 
     default:
