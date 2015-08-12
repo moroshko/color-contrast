@@ -18,8 +18,7 @@
   },
   "dependencies": {
     "react": "^0.14.0-beta3",
-    "react-dom": "^0.14.0-beta3",
-    "react-zeroclipboard": "^3.0.0-beta.2"
+    "react-dom": "^0.14.0-beta3"
   },
   "devDependencies": {
     "autoprefixer-loader": "^2.0.0",

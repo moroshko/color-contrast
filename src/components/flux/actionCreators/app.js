@@ -3,9 +3,7 @@ import {
   UPDATE_FONT_SIZE,
   TOGGLE_IS_FONT_BOLD,
   UPDATE_BACKGROUND_COLOR,
-  UPDATE_ACCESSIBILITY_LEVEL,
-  UPDATE_TEXT_COLOR_COPIED,
-  UPDATE_BACKGROUND_COLOR_COPIED
+  UPDATE_ACCESSIBILITY_LEVEL
 } from 'flux/constants/actionTypes/app';
 
 export function updateTextColor(field, value) {
@@ -40,20 +38,6 @@ export function updateBackgroundColor(field, value) {
 export function updateAccessibilityLevel(value) {
   return {
     type: UPDATE_ACCESSIBILITY_LEVEL,
-    value
-  };
-}
-
-export function updateTextColorCopied(value) {
-  return {
-    type: UPDATE_TEXT_COLOR_COPIED,
-    value
-  };
-}
-
-export function updateBackgroundColorCopied(value) {
-  return {
-    type: UPDATE_BACKGROUND_COLOR_COPIED,
     value
   };
 }
