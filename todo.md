@@ -1,7 +1,7 @@
 ## Todo
 
-* (?) What if there is no solution for AAA?
-* (?) If the entered values give an accessible contrast, there is not point to show the preview.
+* "No solution" message
+* "Already accessible" message
 * Add graph
 * Tweet button
 * Link to Github

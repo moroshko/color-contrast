@@ -41,12 +41,16 @@ class Preview extends Component {
       color: textColor.value,
       backgroundColor: backgroundColor.value
     };
+    const newBackgroundColor =
+      findClosestAccessibleColor(backgroundColor.value, textColor.value, contrastRatio);
+    const newTextColor =
+      findClosestAccessibleColor(textColor.value, backgroundColor.value, contrastRatio);
     const newBackgroundStyle = {
       color: textColor.value,
-      backgroundColor: findClosestAccessibleColor(backgroundColor.value, textColor.value, contrastRatio)
+      backgroundColor: newBackgroundColor
     };
     const newTextStyle = {
-      color: findClosestAccessibleColor(textColor.value, backgroundColor.value, contrastRatio),
+      color: newTextColor,
       backgroundColor: backgroundColor.value
     };
 
@@ -57,15 +61,22 @@ class Preview extends Component {
             <h2 className={styles.previewTitle}>
               New background
             </h2>
-            <div className={styles.previewContent}
-                 style={newBackgroundStyle}>
-              <p className={styles.previewNewColor}>
-                {newBackgroundStyle.backgroundColor}
-              </p>
-              <p className={styles.previewContrast}>
-                contrast: {this.contrast(newBackgroundStyle.color, newBackgroundStyle.backgroundColor)}
-              </p>
-            </div>
+            {
+              newBackgroundColor &&
+                <div className={styles.previewContent} style={newBackgroundStyle}>
+                  <p className={styles.previewNewColor}>
+                    {newBackgroundStyle.backgroundColor}
+                  </p>
+                  <p className={styles.previewContrast}>
+                    contrast: {this.contrast(newBackgroundStyle.color, newBackgroundStyle.backgroundColor)}
+                  </p>
+                </div>
+            }
+            { !newBackgroundColor &&
+                <div className={styles.previewContent}>
+                  Doesn't exist
+                </div>
+            }
           </div>
           <div className={styles.previewContainer}>
             <h2 className={styles.previewTitle}>
@@ -84,15 +95,23 @@ class Preview extends Component {
             <h2 className={styles.previewTitle}>
               New text color
             </h2>
-            <div className={styles.previewContent}
-                 style={newTextStyle}>
-              <p className={styles.previewNewColor}>
-                {newTextStyle.color}
-              </p>
-              <p className={styles.previewContrast}>
-                contrast: {this.contrast(newTextStyle.color, newTextStyle.backgroundColor)}
-              </p>
-            </div>
+            {
+              newTextColor &&
+                <div className={styles.previewContent} style={newTextStyle}>
+                  <p className={styles.previewNewColor}>
+                    {newTextStyle.color}
+                  </p>
+                  <p className={styles.previewContrast}>
+                    contrast: {this.contrast(newTextStyle.color, newTextStyle.backgroundColor)}
+                  </p>
+                </div>
+            }
+            {
+              !newTextColor &&
+                <div className={styles.previewContent}>
+                  Doesn't exist
+                </div>
+            }
           </div>
         </div>
       </div>
