@@ -6,8 +6,7 @@ export default class Editable extends Component {
   static propTypes = {
     isValid: PropTypes.bool.isRequired,
     value: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-    textAlign: PropTypes.string.isRequired
+    onChange: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -40,11 +39,11 @@ export default class Editable extends Component {
   }
 
   render() {
-    const { isValid, value, onChange, textAlign } = this.props;
+    const { isValid, value, onChange } = this.props;
 
     return (
       <input className={styles.input + ' ' + (isValid ? '' : styles.invalid)}
-             type="text" value={value} style={{ textAlign }}
+             type="text" value={value}
              onFocus={this.onFocus} onKeyUp={this.onKeyUp}
              onChange={event => onChange(event.target.value)} />
     );

@@ -65,29 +65,35 @@ class Preview extends Component {
               newBackgroundColor &&
                 <div className={styles.previewContent} style={newBackgroundStyle}>
                   <p className={styles.previewNewColor}>
-                    {newBackgroundStyle.backgroundColor}
+                    &nbsp;
+                  </p>
+                  <p className={styles.previewNewColor}>
+                    {newBackgroundStyle.backgroundColor} background
                   </p>
                   <p className={styles.previewContrast}>
-                    contrast: {this.contrast(newBackgroundStyle.color, newBackgroundStyle.backgroundColor)}
+                    Contrast ratio: {this.contrast(newBackgroundStyle.color, newBackgroundStyle.backgroundColor)}
                   </p>
                 </div>
             }
             { !newBackgroundColor &&
                 <div className={styles.previewContent}>
-                  Doesn't exist
+                  No accessible combination found by changing backgorund lightness.
                 </div>
             }
           </div>
           <div className={styles.previewContainer}>
             <h2 className={styles.previewTitle}>
-              Original
+              Your design
             </h2>
             <div className={styles.previewContent} style={originalStyle}>
               <p className={styles.previewNewColor}>
-                &nbsp;
+                {originalStyle.color} text
+              </p>
+              <p className={styles.previewNewColor}>
+                {originalStyle.backgroundColor} background
               </p>
               <p className={styles.previewContrast}>
-                contrast: {this.contrast(originalStyle.color, originalStyle.backgroundColor)}
+                Contrast ratio: {this.contrast(originalStyle.color, originalStyle.backgroundColor)}
               </p>
             </div>
           </div>
@@ -99,17 +105,20 @@ class Preview extends Component {
               newTextColor &&
                 <div className={styles.previewContent} style={newTextStyle}>
                   <p className={styles.previewNewColor}>
-                    {newTextStyle.color}
+                    {newTextStyle.color} text
+                  </p>
+                  <p className={styles.previewNewColor}>
+                    &nbsp;
                   </p>
                   <p className={styles.previewContrast}>
-                    contrast: {this.contrast(newTextStyle.color, newTextStyle.backgroundColor)}
+                    Contrast ratio: {this.contrast(newTextStyle.color, newTextStyle.backgroundColor)}
                   </p>
                 </div>
             }
             {
               !newTextColor &&
                 <div className={styles.previewContent}>
-                  Doesn't exist
+                  No accessible combination found by changing text lightness.
                 </div>
             }
           </div>

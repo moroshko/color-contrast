@@ -52,19 +52,17 @@ class UserInput extends Component {
       <div className={styles.container}>
         <div className={styles.innerContainer}>
           <div>
-            My text color is
+            <span>My text color is </span>
             <span className={styles.colorContainer}>
               <Editable isValid={textColor.isValueValid}
                         value={textColor.value}
-                        onChange={updateTextColor}
-                        textAlign="center" />
+                        onChange={updateTextColor} />
             </span>
-            at
+            <span> at </span>
             <span className={styles.fontSizeContainer}>
               <Editable isValid={fontSize.isValid}
                         value={fontSize.value}
-                        onChange={updateFontSize}
-                        textAlign="right" />
+                        onChange={updateFontSize} />
             </span>
             px and
             <span className={styles.fontWeightContainer}>
@@ -75,12 +73,11 @@ class UserInput extends Component {
             weight
           </div>
           <div>
-            My background color is
+            <span>My background color is </span>
             <span className={styles.colorContainer}>
               <Editable isValid={backgroundColor.isValueValid}
                         value={backgroundColor.value}
-                        onChange={updateBackgroundColor}
-                        textAlign="center" />
+                        onChange={updateBackgroundColor} />
             </span>
           </div>
           <div>
